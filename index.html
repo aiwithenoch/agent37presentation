@@ -422,6 +422,9 @@
     .config-slide .section-head h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 13px; }
     .config-slide .config-name { color: var(--forest); font-family: "JetBrains Mono", monospace; font-size: .8em; letter-spacing: -.08em; }
     .config-slide .config-title-accent { font-size: .78em; }
+    .prompt-slide .config-layout { margin-top: 18px; }
+    .prompt-slide .config-file-panel { min-height: 320px; }
+    .prompt-slide .config-code { font-size: 12px; line-height: 1.45; }
 
     /* What we are building */
     .assistant-build { display: grid; grid-template-columns: .88fr 1.12fr; align-items: stretch; gap: 30px; margin-top: 18px; }
@@ -734,6 +737,7 @@
       .config-file-panel { min-height: 0; padding: 20px 20px 18px; }
       .config-file-header strong { font-size: 21px; }
       .config-code { font-size: 11px; line-height: 1.52; }
+      .prompt-slide .config-code { font-size: 10px; line-height: 1.45; }
       .config-points { margin-top: 22px; }
       .config-point { padding: 12px 0; }
       .config-point strong { font-size: 20px; }
@@ -1014,6 +1018,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="AGENTS.md — Working Prompt" data-notes="This is the first working draft of AGENTS.md for the Franky 5 assistant. It turns the explanation from the previous slide into instructions we can actually place in the workspace. Keep the job narrow: private executive support for preparation, research, follow-up, and briefings. The assistant must separate facts from assumptions and ask before sending, publishing, booking, or changing anything external.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">AGENTS.md</span> <em class="config-title-accent">the working prompt.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the real starting instruction for F5, our private executive assistant for Franky 5.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT</span><strong>AGENTS.md</strong></div><span class="config-file-tag">USE THIS</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># F5 — executive assistant</span></span><span class="code-line">role: <span class="code-value">private support for Franky 5</span></span><span class="code-line">mission: <span class="code-soft">make the next move easier</span></span><span class="code-line">help: <span class="code-soft">prepare shows, research, follow up</span></span><span class="code-line">style: <span class="code-soft">concise, practical, fact-based</span></span><span class="code-line">ask_first: <span class="code-value">before public or external action</span></span><span class="code-line">never: <span class="code-gold">invent facts, guests, quotes, or commitments</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Job</strong><p>Give F5 a clear job: help Franky prepare and follow through.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Behavior</strong><p>Keep the work useful, short, and grounded in what is known.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Human check</strong><p>F5 can prepare work, but Franky approves anything public or external.</p></div></div>
+              <div class="config-foot"><strong>What we will do:</strong> copy this prompt into the agent workspace, then test it with one real task.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="SOUL.md" data-notes="SOUL.md defines the assistant's character: how it sounds, what it values, and what boundaries it keeps. It should feel calm, prepared, warm, direct, and respectful because the assistant supports a presenter working in public. This is not a license to imitate Franky 5 or speak publicly on his behalf; it is a style and values layer for private support.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1035,6 +1060,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="SOUL.md — Working Prompt" data-notes="This is the working SOUL.md for F5. It sets tone and boundaries without pretending the assistant is Franky 5. The assistant should be calm, warm, direct, prepared, honest, and respectful. It should say what it does not know instead of sounding confident when the facts are missing.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">SOUL.md</span> <em class="config-title-accent">the voice we use.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the actual tone and boundary prompt that should shape every answer.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel gold">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT</span><strong>SOUL.md</strong></div><span class="config-file-tag">SET THE FEEL</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># How F5 should feel</span></span><span class="code-line">voice: <span class="code-value">calm, warm, and direct</span></span><span class="code-line">be: <span class="code-soft">prepared, honest, and respectful</span></span><span class="code-line">write: <span class="code-soft">clear answers before long explanations</span></span><span class="code-line">when_unsure: <span class="code-value">say what is missing</span></span><span class="code-line">protect: <span class="code-gold">Franky's voice, privacy, and reputation</span></span><span class="code-line">never: <span class="code-value">pretend certainty or imitate Franky</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Sound</strong><p>F5 should feel like a calm, prepared colleague.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Tell the truth</strong><p>When something is unclear, F5 should say so plainly.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Keep the boundary</strong><p>Support Franky without pretending to be Franky.</p></div></div>
+              <div class="config-foot gold"><strong>What we will do:</strong> use this file to make the assistant feel consistent, not theatrical.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="IDENTITY.md" data-notes="IDENTITY.md gives the agent a stable label card: the name it uses, its vibe, and a small visual signal such as an emoji. Keep it distinct from SOUL.md: SOUL is character and values; IDENTITY is the concise identity record. The emoji is an interface cue, not a claim that the assistant is a human or an official Max TV account.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1052,6 +1098,27 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Vibe</strong><p>Use a few words to keep the experience coherent across tasks.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Signal</strong><p>The compass emoji makes the agent easy to spot without over-branding it.</p></div></div>
               <div class="config-foot green"><strong>Layman's version:</strong> this is the assistant's name badge.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide prompt-slide" data-title="IDENTITY.md — Working Prompt" data-notes="This is the working IDENTITY.md for F5. The short name and compass emoji are interface cues so people can recognize the assistant. They do not make F5 a human, an official Max TV account, or a public spokesperson.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">IDENTITY.md</span> <em class="config-title-accent">the identity we use.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the small identity card F5 will carry into every conversation.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT</span><strong>IDENTITY.md</strong></div><span class="config-file-tag">KEEP STABLE</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># The assistant's name badge</span></span><span class="code-line">name: <span class="code-value">F5 Executive Assistant</span></span><span class="code-line">short_name: <span class="code-soft">F5</span></span><span class="code-line">role: <span class="code-soft">private support for Franky 5</span></span><span class="code-line">vibe: <span class="code-soft">calm, sharp, media-ready</span></span><span class="code-line">emoji: <span class="code-gold">🧭</span></span><span class="code-line">intro: <span class="code-value">"I'm F5. Here's what I found."</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Name</strong><p>Give the assistant a simple name people can recognize.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Signal</strong><p>The compass emoji makes F5 easy to spot at a glance.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Role</strong><p>Make clear that F5 is private support for Franky 5.</p></div></div>
+              <div class="config-foot green"><strong>What we will do:</strong> keep this short so the identity stays steady across tasks.</div>
             </div>
           </div>
         </article>
@@ -1083,6 +1150,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="USER.md — Working Prompt" data-notes="This is the working USER.md for the assistant. It uses only the public, work-relevant profile needed for the workshop: Frank Kwabena Owusu, known as Franky 5, a Max Morning Live presenter on Max TV. Current schedules, guests, quotes, and commitments still need verification before action. Sources checked 2026-09-17: https://max.com.gh/franky-5-enstooled-guantuahene-of-abiriw-akuapem/ ; https://www.citinewsroom.com/2024/06/the-chat-im-the-one-who-rebranded-nacee-franky-5/ .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">USER.md</span> <em class="config-title-accent">the profile we use.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the real working profile that gives F5 the right person and the right job.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel gold">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING PROFILE</span><strong>USER.md</strong></div><span class="config-file-tag">VERIFY LIVE</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># The person F5 supports</span></span><span class="code-line">name: <span class="code-value">Frank Kwabena Owusu</span></span><span class="code-line">known_as: <span class="code-soft">Franky 5</span></span><span class="code-line">work: <span class="code-soft">presenter, Max Morning Live, Max TV</span></span><span class="code-line">context: <span class="code-soft">Ghanaian media and creative work</span></span><span class="code-line">assistant_job: <span class="code-value">prepare, prioritize, follow through</span></span><span class="code-line">confirm: <span class="code-gold">today's schedule, guests, quotes, commitments</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Who</strong><p>Tell F5 who it is helping and what he does.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Why</strong><p>Connect the profile to the assistant's real job: preparation and follow-through.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Check today</strong><p>Live details still need confirmation before F5 uses them.</p></div></div>
+              <div class="config-foot gold"><strong>What we will do:</strong> keep the profile useful, public, and easy to update.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="MEMORY.md" data-notes="MEMORY.md is the curated long-term memory: the small set of durable facts and decisions that should remain useful across sessions. Keep it concise and reviewed. Do not use it as a dump for every conversation; daily detail belongs in the memory/ folder. For this build, examples include confirmed show formats, recurring people, editorial preferences, and decisions that affect future preparation.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1100,6 +1188,27 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Curate</strong><p>Prefer a few durable truths over a wall of old notes.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Review</strong><p>Update or remove anything that is no longer accurate.</p></div></div>
               <div class="config-foot"><strong>Layman's version:</strong> the assistant's useful memory, not its entire diary.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide prompt-slide" data-title="MEMORY.md — Working Prompt" data-notes="This is the working MEMORY.md for F5. It keeps only durable, useful context: confirmed show formats, recurring people, editorial preferences, approved decisions, and open loops. Daily details belong in dated files under memory/. The assistant should never turn guesses, secrets, or unverified claims into long-term memory.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">MEMORY.md</span> <em class="config-title-accent">the memory we keep.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the real long-term memory prompt: small, useful, and reviewed.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING MEMORY</span><strong>MEMORY.md</strong></div><span class="config-file-tag">KEEP SMALL</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">keep:</span></span><span class="code-line">  confirmed show formats</span><span class="code-line">  recurring people and relationships</span><span class="code-line">  editorial preferences</span><span class="code-line">  approved decisions and open loops</span><span class="code-line"><span class="code-key">review:</span> <span class="code-soft">remove facts that changed</span></span><span class="code-line"><span class="code-key">daily_detail:</span> <span class="code-value">save in memory/YYYY-MM-DD.md</span></span><span class="code-line"><span class="code-key">never_keep:</span> <span class="code-gold">guesses, secrets, or unverified claims</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Keep</strong><p>Save facts that can make the next conversation better.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Review</strong><p>Remove old information when it stops being true.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Separate</strong><p>Put today's details in the daily memory folder.</p></div></div>
+              <div class="config-foot"><strong>What we will do:</strong> make memory a trusted shortlist, not a full conversation dump.</div>
             </div>
           </div>
         </article>
@@ -1125,6 +1234,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="BOOTSTRAP.md — Working Prompt" data-notes="This is the working BOOTSTRAP.md for first-run setup. It gives F5 a short sequence for meeting Franky, asking what support matters, confirming boundaries, saving approved context, and testing one useful task. The file should be marked complete or removed after setup rather than running as a permanent instruction. OpenClaw bootstrapping guidance: https://github.com/openclaw/openclaw/blob/main/docs/start/bootstrapping.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">BOOTSTRAP.md</span> <em class="config-title-accent">the first conversation.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the one-time setup prompt that turns a blank agent into a useful first version.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT</span><strong>BOOTSTRAP.md</strong></div><span class="config-file-tag">ONE TIME</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">1.</span> introduce F5 and explain its job</span><span class="code-line"><span class="code-key">2.</span> ask what Franky wants help with first</span><span class="code-line"><span class="code-key">3.</span> confirm channels, boundaries, and approval rules</span><span class="code-line"><span class="code-key">4.</span> save only context Franky approves</span><span class="code-line"><span class="code-key">5.</span> test one small useful task</span><span class="code-line"><span class="code-key">6.</span> mark setup complete and remove this file</span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Introduce</strong><p>Explain what F5 is and what it can help with.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Ask</strong><p>Learn what Franky actually wants before building assumptions.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Test</strong><p>Prove the setup with one small, useful task.</p></div></div>
+              <div class="config-foot green"><strong>What we will do:</strong> use this once, then let the normal workspace files take over.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="BOOT.md" data-notes="BOOT.md is an optional startup checklist. If the boot-md hook is enabled, keep it short and operational: check what is happening today, surface preparation, review open loops, and ask for approval before external action. Do not confuse this with the one-time BOOTSTRAP.md setup ritual. Source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1142,6 +1272,27 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Prioritize</strong><p>Surface the few things that can change the next move.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Ask first</strong><p>Preparation is automatic; public or external action still needs approval.</p></div></div>
               <div class="config-foot gold"><strong>Layman's version:</strong> the morning checklist, not the agent's personality.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide prompt-slide" data-title="BOOT.md — Working Prompt" data-notes="This is the optional working BOOT.md for F5. If the boot-md hook is enabled, it gives the assistant a short startup routine: check today's show and schedule, prepare the next conversation, surface meaningful items, and ask before external action. It is separate from the one-time BOOTSTRAP.md setup ritual. Source: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">BOOT.md</span> <em class="config-title-accent">the startup checklist.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the short routine F5 can use when the system starts.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel gold">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT · OPTIONAL</span><strong>BOOT.md</strong></div><span class="config-file-tag">KEEP SHORT</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">when_starting:</span></span><span class="code-line">  check today's show, schedule, and open loops</span><span class="code-line">  prepare what is needed for the next conversation</span><span class="code-line">  surface only items that need attention</span><span class="code-line"><span class="code-key">ask_first:</span> <span class="code-value">before sending or changing anything</span></span><span class="code-line"><span class="code-key">if_nothing_changed:</span> <span class="code-gold">NO_REPLY</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Look around</strong><p>Start with what is happening today, not a generic information dump.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Prepare</strong><p>Bring forward the few things that can make the next move easier.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Stay quiet</strong><p>If nothing changed, F5 should not create noise.</p></div></div>
+              <div class="config-foot gold"><strong>What we will do:</strong> keep startup useful without making F5 feel intrusive.</div>
             </div>
           </div>
         </article>
@@ -1167,6 +1318,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="Memory — Working Prompt" data-notes="This is the working template for a dated daily memory note. It captures what happened, what Franky approved, what still needs action, and what should carry into the next session. It keeps time-bound detail out of MEMORY.md and gives F5 a simple record to retrieve later. The structure follows the OpenClaw workspace model: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">Memory</span> <em class="config-title-accent">the daily note.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the actual template for recording one day's work without making it permanent.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING TEMPLATE</span><strong>memory/YYYY-MM-DD.md</strong></div><span class="config-file-tag">DATE IT</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">date:</span> <span class="code-soft">YYYY-MM-DD</span></span><span class="code-line"><span class="code-key">today:</span></span><span class="code-line">  what happened</span><span class="code-line"><span class="code-key">decisions:</span> what Franky approved</span><span class="code-line"><span class="code-key">follow_ups:</span> who or what needs action</span><span class="code-line"><span class="code-key">carry_forward:</span> facts needed next time</span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Record</strong><p>Write down the work that happened today.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Track</strong><p>Keep decisions and follow-ups visible for the next session.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Carry forward</strong><p>Save only the facts that will actually help tomorrow.</p></div></div>
+              <div class="config-foot"><strong>What we will do:</strong> use the daily note for context, not as a second rulebook.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="Skills" data-notes="The skills/ folder contains extra abilities that can be loaded when needed. A skill should be a clear, repeatable procedure: when to use it, what inputs it needs, what steps it follows, and what safe output it produces. These are candidate skills for the Franky 5 assistant, not claims that they are already installed. OpenClaw's skills documentation: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1184,6 +1356,27 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Clear trigger</strong><p>Explain when to load it and what information it needs.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Safe output</strong><p>Define what the skill returns and where approval is required.</p></div></div>
               <div class="config-foot green"><strong>Layman's version:</strong> skills are the assistant's recipe cards.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide prompt-slide" data-title="Skills — Working Prompt" data-notes="This is the first working skill for F5: a show-prep skill. It is a candidate procedure, not a claim that the skill is already installed. It should load when Franky needs a show or segment brief, verify current facts, prepare angles and questions, flag gaps, and return a short brief with clear next actions. Public outputs still require Franky's review. OpenClaw skills documentation: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">Skills</span> <em class="config-title-accent">the first ability.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the first repeatable playbook we can give F5: preparing a show or segment brief.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING SKILL</span><strong>show-prep/SKILL.md</strong></div><span class="config-file-tag">LOAD WHEN NEEDED</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">use_when:</span> Franky needs a show or segment brief</span><span class="code-line"><span class="code-key">steps:</span></span><span class="code-line">  confirm date, topic, guest, and audience</span><span class="code-line">  verify current facts</span><span class="code-line">  prepare angles and questions</span><span class="code-line">  flag gaps and risks</span><span class="code-line"><span class="code-key">output:</span> a short brief with clear next actions</span><span class="code-line"><span class="code-key">approval:</span> Franky reviews anything public</span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Trigger</strong><p>Load this skill when Franky needs preparation for a show or segment.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Steps</strong><p>Give F5 a repeatable order so it does not skip the important checks.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Output</strong><p>Return a useful brief, then leave the public decision with Franky.</p></div></div>
+              <div class="config-foot green"><strong>What we will do:</strong> start with one ability and add more only when the need is real.</div>
             </div>
           </div>
         </article>
@@ -1209,6 +1402,27 @@
           </div>
         </article>
 
+        <article class="slide paper config-slide prompt-slide" data-title="TOOLS.md — Working Prompt" data-notes="This is the optional working TOOLS.md for F5. It explains how to use available tools safely. It does not create the tools or grant permission. Research should verify facts before F5 uses them, calendar work should be read-first and approval-based, messaging should be drafted before sending, and credentials must stay out of the workspace. OpenClaw tool guidance: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent.md ; https://github.com/openclaw/openclaw/blob/main/docs/gateway/config-tools.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">TOOLS.md</span> <em class="config-title-accent">the tool rules.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the real safety note for how F5 should use tools it has access to.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel gold">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT · OPTIONAL</span><strong>TOOLS.md</strong></div><span class="config-file-tag">NO SECRETS</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">research:</span> verify facts before using them</span><span class="code-line"><span class="code-key">calendar:</span> read first; ask before changing</span><span class="code-line"><span class="code-key">messaging:</span> draft first; ask before sending</span><span class="code-line"><span class="code-key">files:</span> edit only approved workspace files</span><span class="code-line"><span class="code-key">ask_first:</span> before any public or external action</span><span class="code-line"><span class="code-key">never:</span> <span class="code-gold">store keys, passwords, or tokens here</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Use carefully</strong><p>F5 should check facts and inputs before a tool changes anything.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Draft first</strong><p>Messages and public work should be prepared for Franky to review.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Protect secrets</strong><p>Passwords and API keys belong in a secret store, never in this file.</p></div></div>
+              <div class="config-foot gold"><strong>What we will do:</strong> document safe habits without pretending this file grants access.</div>
+            </div>
+          </div>
+        </article>
+
         <article class="slide paper config-slide" data-title="HEARTBEAT.md" data-notes="HEARTBEAT.md is optional and implementation-dependent. OpenClaw's current heartbeat docs describe heartbeat as a system-owned automation that runs a periodic main-session turn; the cadence and prompt are configured in heartbeat settings. If this workspace uses a heartbeat scratch file, keep it narrow: check for meaningful changes, surface something that needs attention, and stay silent when nothing changed. Source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/gateway/heartbeat.md ; https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md .">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1226,6 +1440,27 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Silence</strong><p>If nothing changed, do not create noise just to prove the agent is awake.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Control</strong><p>The heartbeat settings decide when it runs and what it is allowed to do.</p></div></div>
               <div class="config-foot green"><strong>Layman's version:</strong> a quiet watchman, not a new personality file.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide prompt-slide" data-title="HEARTBEAT.md — Working Prompt" data-notes="This is the optional working HEARTBEAT.md for F5. If heartbeat is enabled by the runtime, it should check only for meaningful changes, notify Franky when something needs attention or a decision, and stay quiet when nothing changed. It must not send or publish anything without approval. OpenClaw heartbeat documentation: https://github.com/openclaw/openclaw/blob/main/docs/gateway/heartbeat.md ; https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">HEARTBEAT.md</span> <em class="config-title-accent">the quiet check-in.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the real optional prompt for checking in without creating noise.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT · OPTIONAL</span><strong>HEARTBEAT.md</strong></div><span class="config-file-tag">ONLY IF ENABLED</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">check:</span> schedule, open loops, and meaningful changes</span><span class="code-line"><span class="code-key">notify:</span> only when Franky needs to know or decide</span><span class="code-line"><span class="code-key">stay_quiet:</span> when nothing changed</span><span class="code-line"><span class="code-key">ask_first:</span> before external action</span><span class="code-line"><span class="code-key">never:</span> create noise just to look active</span><span class="code-line"><span class="code-key">when_quiet:</span> <span class="code-gold">NO_REPLY</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Notice</strong><p>Look for a real change that matters to Franky.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Be quiet</strong><p>If nothing changed, F5 should say nothing.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Ask first</strong><p>A check-in may surface work, but it may not publish or send it.</p></div></div>
+              <div class="config-foot green"><strong>What we will do:</strong> enable this only after the basic assistant is useful and trusted.</div>
             </div>
           </div>
         </article>
