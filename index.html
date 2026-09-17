@@ -868,33 +868,6 @@
           <div class="harness-footer formula-callout reveal" style="--delay:.42s"><strong>Simple picture:</strong> OpenClaw is the harness. Agent 37 is the place that keeps it running.</div>
         </article>
 
-        <article class="slide paper" data-title="OpenClaw Workspace Anatomy" data-notes="This is the OpenClaw workspace anatomy: the parts that give the agent instructions, identity, memory, and skills. Make the distinction explicit: Agent 37 is the hosted runtime where OpenClaw stays running; this workspace is the editable configuration and context that gives the agent its shape. Walk through AGENTS.md as the operating manual, SOUL.md and IDENTITY.md as the agent's character, USER.md as Franky 5's profile, MEMORY.md and memory/ as continuity, and skills/ as capabilities it can load when needed. BOOTSTRAP.md is a one-time first-run ritual; BOOT.md is an optional startup checklist when the boot-md hook is enabled. Do not call this folder the runtime. Do not present TOOLS.md or HEARTBEAT.md as current core files. Sources checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md ; https://github.com/openclaw/openclaw/blob/main/docs/reference/token-use.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
-          <div class="slide-number"></div>
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">OPENCLAW WORKSPACE</span>
-            <h2 class="reveal" style="--delay:.12s">OpenClaw <em>workspace anatomy.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">These files configure the agent. Agent 37 is where OpenClaw runs.</p>
-          </div>
-          <div class="workspace-layout reveal" style="--delay:.28s">
-            <section class="workspace-panel" aria-label="OpenClaw workspace file tree">
-              <div class="workspace-toolbar">
-                <span class="workspace-state">AGENT CONFIG</span>
-              </div>
-              <pre class="workspace-tree">├── <span class="tree-file">AGENTS.md</span>       <span class="tree-note">rules for how the agent should work</span>
-├── <span class="tree-file">SOUL.md</span>         <span class="tree-note">the agent's personality and boundaries</span>
-├── <span class="tree-file">IDENTITY.md</span>    <span class="tree-note">the agent's name, vibe, and emoji</span>
-├── <span class="tree-file">USER.md</span>         <span class="tree-note">details about the person it helps</span>
-├── <span class="tree-file">MEMORY.md</span>      <span class="tree-note">important facts it should remember</span>
-├── <span class="tree-file">BOOTSTRAP.md</span>  <span class="tree-note">instructions for first-time setup</span>
-├── <span class="tree-file">BOOT.md</span>        <span class="tree-note">a checklist for when the system starts</span>
-├── <span class="tree-file">memory/</span>         <span class="tree-note">daily work notes</span>
-│   └── <span class="tree-file">YYYY-MM-DD.md</span> <span class="tree-note">notes from a specific day</span>
-└── <span class="tree-file">skills/</span>         <span class="tree-note">extra abilities for the agent</span>
-    └── <span class="tree-file">&lt;skill-name&gt;/SKILL.md</span> <span class="tree-note">steps for using one ability</span></pre>
-            </section>
-          </div>
-        </article>
-
         <article class="slide paper" data-title="What We Are Building" data-notes="This slide defines the product we are building next: an executive assistant for Franky 5. Treat the three capabilities on the right as the first scope to validate, not a finished specification. Explain that the assistant should understand Franky's priorities, keep useful context, turn requests into follow-ups, and prepare briefings that make the next action clear. The live build will turn this product shape into the OpenClaw agent running on Agent 37.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -925,6 +898,33 @@
             </div>
           </div>
           <div class="assistant-footer formula-callout reveal" style="--delay:.42s"><strong>Build target:</strong> one trusted assistant that helps Franky 5 stay ahead of the work.</div>
+        </article>
+
+        <article class="slide paper" data-title="OpenClaw Workspace Anatomy" data-notes="This is the OpenClaw workspace anatomy: the parts that give the agent instructions, identity, memory, and skills. Make the distinction explicit: Agent 37 is the hosted runtime where OpenClaw stays running; this workspace is the editable configuration and context that gives the agent its shape. Walk through AGENTS.md as the operating manual, SOUL.md and IDENTITY.md as the agent's character, USER.md as Franky 5's profile, MEMORY.md and memory/ as continuity, and skills/ as capabilities it can load when needed. BOOTSTRAP.md is a one-time first-run ritual; BOOT.md is an optional startup checklist when the boot-md hook is enabled. Do not call this folder the runtime. Do not present TOOLS.md or HEARTBEAT.md as current core files. Sources checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md ; https://github.com/openclaw/openclaw/blob/main/docs/reference/token-use.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">OPENCLAW WORKSPACE</span>
+            <h2 class="reveal" style="--delay:.12s">OpenClaw <em>workspace anatomy.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">These files configure the agent. Agent 37 is where OpenClaw runs.</p>
+          </div>
+          <div class="workspace-layout reveal" style="--delay:.28s">
+            <section class="workspace-panel" aria-label="OpenClaw workspace file tree">
+              <div class="workspace-toolbar">
+                <span class="workspace-state">AGENT CONFIG</span>
+              </div>
+              <pre class="workspace-tree">├── <span class="tree-file">AGENTS.md</span>       <span class="tree-note">rules for how the agent should work</span>
+├── <span class="tree-file">SOUL.md</span>         <span class="tree-note">the agent's personality and boundaries</span>
+├── <span class="tree-file">IDENTITY.md</span>    <span class="tree-note">the agent's name, vibe, and emoji</span>
+├── <span class="tree-file">USER.md</span>         <span class="tree-note">details about the person it helps</span>
+├── <span class="tree-file">MEMORY.md</span>      <span class="tree-note">important facts it should remember</span>
+├── <span class="tree-file">BOOTSTRAP.md</span>  <span class="tree-note">instructions for first-time setup</span>
+├── <span class="tree-file">BOOT.md</span>        <span class="tree-note">a checklist for when the system starts</span>
+├── <span class="tree-file">memory/</span>         <span class="tree-note">daily work notes</span>
+│   └── <span class="tree-file">YYYY-MM-DD.md</span> <span class="tree-note">notes from a specific day</span>
+└── <span class="tree-file">skills/</span>         <span class="tree-note">extra abilities for the agent</span>
+    └── <span class="tree-file">&lt;skill-name&gt;/SKILL.md</span> <span class="tree-note">steps for using one ability</span></pre>
+            </section>
+          </div>
         </article>
 
 
