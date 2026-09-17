@@ -299,15 +299,15 @@
     .platform-layout { display: grid; grid-template-columns: .72fr 1.28fr; align-items: center; gap: 30px; margin-top: 28px; }
     .platform-copy { max-width: 320px; }
     .platform-copy p { margin-top: 14px; color: var(--muted); font-size: 16px; line-height: 1.32; }
-    .platform-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; padding: 12px 22px; border: 1px solid var(--line); border-radius: 22px; background: var(--paper-deep); }
-    .platform-option { display: grid; grid-template-columns: 31px 32px 1fr; gap: 9px; align-items: center; min-height: 64px; border-bottom: 1px solid var(--line); }
-    .platform-option:nth-last-child(-n + 2) { border-bottom: 0; }
-    .platform-option .platform-number { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; color: var(--paper); background: var(--forest); font-family: "JetBrains Mono", monospace; font-size: 9px; }
+    .platform-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; padding: 8px 22px; border: 1px solid var(--line); border-radius: 22px; background: var(--paper-deep); }
+    .platform-option { display: grid; grid-template-columns: 28px 28px 1fr; gap: 7px; align-items: center; min-height: 46px; border-bottom: 1px solid var(--line); }
+    .platform-option:last-child { border-bottom: 0; }
+    .platform-option .platform-number { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; color: var(--paper); background: var(--forest); font-family: "JetBrains Mono", monospace; font-size: 8px; }
     .platform-option:nth-child(3n) .platform-number { color: var(--ink); background: var(--gold); }
     .platform-option:nth-child(3n + 1) .platform-number { background: var(--coral); }
-    .platform-logo { display: block; width: 28px; height: 28px; object-fit: contain; }
-    .platform-logo.openclaw { width: 28px; height: 28px; object-fit: cover; object-position: left center; }
-    .platform-option strong { min-width: 0; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 21px; letter-spacing: -.03em; }
+    .platform-logo { display: block; width: 25px; height: 25px; object-fit: contain; }
+    .platform-logo.openclaw { width: 25px; height: 25px; object-fit: cover; object-position: left center; }
+    .platform-option strong { min-width: 0; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 19px; letter-spacing: -.03em; }
     .runtime-brand { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
     .runtime-brand img { display: block; width: 34px; height: 34px; object-fit: contain; }
     .runtime-brand h3 { margin-top: 0; }
@@ -854,7 +854,7 @@
           <div class="formula-callout reveal" style="--delay:.42s"><strong>Cloud</strong> gives you access from anywhere. <strong>Local</strong> gives you more control over the machine.</div>
         </article>
 
-        <article class="slide paper" data-title="Platform and Architecture Choices" data-notes="If someone does not want to code or manage the complete setup themselves, introduce the platform and agentic architecture choices. The researched names are Grok Bot, Meta Muse, Claude Code, Codex, Hermes, OpenClaw, NVIDIA NemoClaw, MiniMax MaxClaw, KimiClaw, and Manus. Use the logos as identifiers, not endorsements. Sources checked 2026-09-17: https://docs.x.ai/grok-bot/overview ; https://ai.meta.com/muse/ ; https://www.anthropic.com/news ; https://openai.com/codex/ ; https://github.com/hermes-agent-org/hermes ; https://www.openclaw.org/ ; https://www.nvidia.com/en-us/ai/nemoclaw/ ; https://agent.minimax.io/activity/max-claw ; https://www.kimi.com/en/help/kimi-claw/kimiclaw-group-chat ; https://events.manus.im/fr/brand . After this comparison, move directly to the workshop demo route: OpenClaw on Agent 37. The point is to choose a route you can inspect, test, and operate.">
+        <article class="slide paper" data-title="Platform and Architecture Choices" data-notes="If someone does not want to code or manage the complete setup themselves, introduce the platform and agentic architecture choices. The researched names are Grok Bot, Meta Muse, Claude Code, Codex, Hermes, OpenClaw, NVIDIA NemoClaw, MiniMax MaxClaw, KimiClaw, Manus, and Relevance AI. Use the logos as identifiers, not endorsements. Sources checked 2026-09-17: https://docs.x.ai/grok-bot/overview ; https://ai.meta.com/muse/ ; https://www.anthropic.com/news ; https://openai.com/codex/ ; https://github.com/hermes-agent-org/hermes ; https://www.openclaw.org/ ; https://www.nvidia.com/en-us/ai/nemoclaw/ ; https://agent.minimax.io/activity/max-claw ; https://www.kimi.com/en/help/kimi-claw/kimiclaw-group-chat ; https://events.manus.im/fr/brand ; https://relevanceai.com/ . After this comparison, move directly to the workshop demo route: OpenClaw on Agent 37. The point is to choose a route you can inspect, test, and operate.">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE CHOICE</span>
@@ -876,6 +876,7 @@
               <div class="platform-option"><span class="platform-number">08</span><img class="platform-logo" src="assets/logos/maxclaw.svg" alt="MiniMax MaxClaw logo"><strong>MaxClaw</strong></div>
               <div class="platform-option"><span class="platform-number">09</span><img class="platform-logo" src="assets/logos/kimiclaw.svg" alt="KimiClaw logo"><strong>KimiClaw</strong></div>
               <div class="platform-option"><span class="platform-number">10</span><img class="platform-logo" src="assets/logos/manus.svg" alt="Manus logo"><strong>Manus</strong></div>
+              <div class="platform-option"><span class="platform-number">11</span><img class="platform-logo" src="assets/logos/relevance-ai.png" alt="Relevance AI logo"><strong>Relevance AI</strong></div>
             </div>
           </div>
           <div class="platform-footer formula-callout reveal" style="--delay:.42s"><strong>Next:</strong> open the demo route: OpenClaw on Agent 37.</div>
