@@ -423,8 +423,10 @@
     .config-slide .config-name { color: var(--forest); font-family: "JetBrains Mono", monospace; font-size: .8em; letter-spacing: -.08em; }
     .config-slide .config-title-accent { font-size: .78em; }
     .prompt-slide .config-layout { margin-top: 18px; }
-    .prompt-slide .config-file-panel { min-height: 320px; }
-    .prompt-slide .config-code { font-size: 12px; line-height: 1.45; }
+    .prompt-slide .config-layout { grid-template-columns: 1fr; }
+    .prompt-slide .config-points { display: none; }
+    .prompt-slide .config-file-panel { min-height: 300px; padding: 25px 32px 20px; }
+    .prompt-slide .config-code { max-width: 100%; font-size: 12px; line-height: 1.38; }
 
     /* What we are building */
     .assistant-build { display: grid; grid-template-columns: .88fr 1.12fr; align-items: stretch; gap: 30px; margin-top: 18px; }
@@ -737,7 +739,8 @@
       .config-file-panel { min-height: 0; padding: 20px 20px 18px; }
       .config-file-header strong { font-size: 21px; }
       .config-code { font-size: 11px; line-height: 1.52; }
-      .prompt-slide .config-code { font-size: 10px; line-height: 1.45; }
+      .prompt-slide .config-file-panel { padding: 20px 20px 18px; }
+      .prompt-slide .config-code { font-size: 11px; line-height: 1.46; }
       .config-points { margin-top: 22px; }
       .config-point { padding: 12px 0; }
       .config-point strong { font-size: 20px; }
@@ -1007,7 +1010,7 @@
           <div class="config-layout reveal" style="--delay:.3s">
             <section class="config-file-panel">
               <div class="config-file-header"><div><span class="config-file-kicker">OPERATING MANUAL</span><strong>AGENTS.md</strong></div><span class="config-file-tag">WRITE FIRST</span></div>
-              <pre class="config-code"><span class="code-line"><span class="code-comment"># F5 — executive assistant</span></span><span class="code-line">job: <span class="code-value">make Franky 5's next move easier</span></span><span class="code-line">focus: <span class="code-soft">prepare · prioritize · follow through</span></span><span class="code-line">style: <span class="code-soft">useful, concise, grounded in facts</span></span><span class="code-line">rule: <span class="code-value">ask before sending or publishing</span></span><span class="code-line">truth: <span class="code-gold">never invent a fact, guest, quote, or commitment</span></span></pre>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># What this file does</span></span><span class="code-line">purpose: <span class="code-value">tell the agent how to work</span></span><span class="code-line">contains: <span class="code-soft">instructions, scope, and boundaries</span></span><span class="code-line">loaded: <span class="code-soft">into OpenClaw's system context</span></span><span class="code-line">used: <span class="code-soft">when the agent handles a task</span></span><span class="code-line">changed: <span class="code-gold">when the job or rules change</span></span></pre>
             </section>
             <div class="config-points">
               <div class="config-point"><span class="config-point-index">01</span><div><strong>Purpose</strong><p>The rulebook for what the agent is responsible for.</p></div></div>
@@ -1023,12 +1026,12 @@
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
             <h2 class="reveal" style="--delay:.12s"><span class="config-name">AGENTS.md</span> <em class="config-title-accent">the system instructions.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">This is the actual workspace instruction file that becomes part of F5's system context.</p>
+            <p class="body-copy reveal" style="--delay:.2s">The exact AGENTS.md instruction block we will place in F5's workspace.</p>
           </div>
           <div class="config-layout reveal" style="--delay:.3s">
             <section class="config-file-panel">
               <div class="config-file-header"><div><span class="config-file-kicker">WORKING DRAFT</span><strong>AGENTS.md</strong></div><span class="config-file-tag">USE THIS</span></div>
-              <pre class="config-code"><span class="code-line"><span class="code-comment"># F5 — executive assistant</span></span><span class="code-line">role: <span class="code-value">private support for Franky 5</span></span><span class="code-line">mission: <span class="code-soft">make the next move easier</span></span><span class="code-line">help: <span class="code-soft">prepare shows, research, follow up</span></span><span class="code-line">style: <span class="code-soft">concise, practical, fact-based</span></span><span class="code-line">ask_first: <span class="code-value">before public or external action</span></span><span class="code-line">never: <span class="code-gold">invent facts, guests, quotes, or commitments</span></span></pre>
+              <pre class="config-code"><span class="code-line"><span class="code-comment"># F5 — Executive Assistant for Franky 5</span></span><span class="code-line">You are F5, a private executive assistant for Franky 5.</span><span class="code-line">Help Franky prepare for work, research topics, and follow up.</span><span class="code-line">Turn loose requests into clear next steps.</span><span class="code-line"><span class="code-key">When you answer:</span></span><span class="code-line">- be concise and grounded in verified facts</span><span class="code-line">- separate known facts from assumptions</span><span class="code-line">- say when something needs checking</span><span class="code-line">Before public or external action, show Franky the draft and ask for approval.</span><span class="code-line"><span class="code-gold">Never invent a guest, quote, schedule, commitment, or source.</span></span></pre>
             </section>
             <div class="config-points">
               <div class="config-point"><span class="config-point-index">01</span><div><strong>Job</strong><p>Give F5 a clear job: help Franky prepare and follow through.</p></div></div>
