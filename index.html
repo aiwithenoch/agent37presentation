@@ -353,6 +353,22 @@
     .availability-badge::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px rgba(35, 170, 91, .13); }
     .harness-footer { margin-top: 13px; }
 
+    /* OpenClaw workspace */
+    .workspace-layout { display: grid; gap: 16px; margin-top: 24px; }
+    .workspace-panel { padding: 22px 26px 20px; border: 1px solid rgba(24, 65, 44, .12); border-radius: 22px; background: #f5f6f4; box-shadow: 0 18px 34px rgba(24, 65, 44, .07); }
+    .workspace-toolbar { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+    .workspace-glyph { color: var(--forest); font-family: "JetBrains Mono", monospace; font-size: 21px; font-weight: 700; letter-spacing: -.08em; }
+    .workspace-toolbar strong { font-size: 20px; font-weight: 600; letter-spacing: -.03em; }
+    .workspace-toolbar .workspace-state { margin-left: auto; padding: 6px 9px; border: 1px solid rgba(35, 170, 91, .24); border-radius: 999px; color: var(--success); background: rgba(228, 241, 232, .76); font-family: "JetBrains Mono", monospace; font-size: 8px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .workspace-tree { margin: 21px 0 0; color: var(--ink); font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 13px; line-height: 1.38; white-space: pre; }
+    .workspace-tree .tree-path { color: var(--forest); font-weight: 700; }
+    .workspace-tree .tree-file { color: var(--ink); font-weight: 600; }
+    .workspace-tree .tree-note { color: var(--muted); font-size: .86em; }
+    .workspace-key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .workspace-key-item { min-height: 76px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(244, 241, 233, .56); }
+    .workspace-key-item strong { display: block; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 18px; letter-spacing: -.03em; }
+    .workspace-key-item p { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.2; }
+
     /* What we are building */
     .assistant-build { display: grid; grid-template-columns: .88fr 1.12fr; align-items: stretch; gap: 30px; margin-top: 18px; }
     .assistant-brief { padding: 17px 22px; border: 1px solid rgba(255, 109, 90, .4); border-radius: 22px; background: #fff0ed; }
@@ -654,6 +670,11 @@
       .harness-card { min-height: 0; }
       .harness-link { min-height: 42px; }
       .harness-link::before { right: 38%; left: 38%; }
+      .workspace-panel { padding: 18px 16px; }
+      .workspace-toolbar strong { font-size: 17px; }
+      .workspace-toolbar .workspace-state { font-size: 7px; }
+      .workspace-tree { font-size: 11px; line-height: 1.55; overflow-x: auto; }
+      .workspace-key { grid-template-columns: 1fr; }
       .assistant-build { display: block; }
       .assistant-scope { margin-top: 22px; }
       .assistant-brief h3 { font-size: 32px; }
@@ -845,6 +866,36 @@
             </section>
           </div>
           <div class="harness-footer formula-callout reveal" style="--delay:.42s"><strong>Simple picture:</strong> OpenClaw is the harness. Agent 37 is the place that keeps it running.</div>
+        </article>
+
+        <article class="slide paper" data-title="Inside the OpenClaw Workspace" data-notes="After defining OpenClaw as the harness, show the workspace as the agent's home. It is plain text on purpose: instructions, identity, memory, and skills are visible and editable. Walk through AGENTS.md as the operating manual, SOUL.md and IDENTITY.md as the agent's character, USER.md as Franky 5's profile, MEMORY.md and memory/ as continuity, and skills/ as capabilities it can load when needed. BOOTSTRAP.md is a one-time first-run ritual; BOOT.md is an optional startup checklist when the boot-md hook is enabled. Do not present TOOLS.md or HEARTBEAT.md as current core files. Sources checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md ; https://github.com/openclaw/openclaw/blob/main/docs/reference/token-use.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE WORKSPACE</span>
+            <h2 class="reveal" style="--delay:.12s">Where the agent <em>lives.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">OpenClaw's home is a plain-text workspace: instructions, identity, memory, and skills in one place.</p>
+          </div>
+          <div class="workspace-layout reveal" style="--delay:.28s">
+            <section class="workspace-panel" aria-label="OpenClaw workspace file tree">
+              <div class="workspace-toolbar">
+                <span class="workspace-glyph" aria-hidden="true">&lt;/&gt;</span>
+                <strong>Plain text</strong>
+                <span class="workspace-state">AGENT HOME</span>
+              </div>
+              <pre class="workspace-tree"><span class="tree-path">~/.openclaw/workspace/</span>
+├── <span class="tree-file">AGENTS.md</span>       <span class="tree-note">how it works</span>
+├── <span class="tree-file">SOUL.md</span>         <span class="tree-note">personality + boundaries</span>
+├── <span class="tree-file">IDENTITY.md</span>    <span class="tree-note">name, vibe, emoji</span>
+├── <span class="tree-file">USER.md</span>         <span class="tree-note">Franky 5's profile</span>
+├── <span class="tree-file">MEMORY.md</span>      <span class="tree-note">long-term memory</span>
+├── <span class="tree-file">BOOTSTRAP.md</span>  <span class="tree-note">first run only</span>
+├── <span class="tree-file">BOOT.md</span>        <span class="tree-note">optional startup hook</span>
+├── <span class="tree-file">memory/</span>
+│   └── <span class="tree-file">YYYY-MM-DD.md</span> <span class="tree-note">daily notes</span>
+└── <span class="tree-file">skills/</span>
+    └── <span class="tree-file">&lt;skill-name&gt;/SKILL.md</span> <span class="tree-note">load when needed</span></pre>
+            </section>
+          </div>
         </article>
 
         <article class="slide paper" data-title="What We Are Building" data-notes="This slide defines the product we are building next: an executive assistant for Franky 5. Treat the three capabilities on the right as the first scope to validate, not a finished specification. Explain that the assistant should understand Franky's priorities, keep useful context, turn requests into follow-ups, and prepare briefings that make the next action clear. The live build will turn this product shape into the OpenClaw agent running on Agent 37.">
