@@ -7,8 +7,6 @@
   <meta name="description" content="Set up your own AI agent — a practical AI With Enoch workshop deck.">
   <title>Set Up Your Own AI Agent — AI With Enoch</title>
   <style>
-    @import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=clash-display@500,600,700&display=swap");
-
     :root {
       --paper: #fbfaf6;
       --paper-deep: #f4f1e9;
@@ -41,7 +39,7 @@
       background:
         radial-gradient(circle at 18% 4%, rgba(218, 168, 67, .11), transparent 28rem),
         #0d120f;
-      font-family: "Cabinet Grotesk", "Avenir Next", system-ui, sans-serif;
+      font-family: "Avenir Next", "Avenir", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -118,7 +116,7 @@
     .slide.green::after { right: auto; left: -18%; bottom: -54%; background: radial-gradient(circle, rgba(218, 168, 67, .2), transparent 66%); }
 
     h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { font-family: "Clash Display", "Avenir Next", system-ui, sans-serif; letter-spacing: -.055em; }
+    h1, h2, h3 { font-family: "Avenir Next", "Avenir", system-ui, sans-serif; letter-spacing: -.055em; }
     h1 { font-size: clamp(58px, 7.2vw, 104px); line-height: .91; }
     h2 { max-width: 820px; font-size: clamp(48px, 5.6vw, 78px); line-height: .94; }
     h3 { font-size: 25px; line-height: 1; }
@@ -224,7 +222,7 @@
     .hero-core { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 150px; height: 150px; border: 1px solid rgba(255, 255, 255, .26); border-radius: 34px; color: var(--paper); background: linear-gradient(145deg, #23372b, #101613); box-shadow: 0 18px 42px rgba(0, 0, 0, .35), 0 0 0 12px rgba(255, 109, 90, .08); transform: translate(-50%, -50%) rotate(-4deg); text-align: center; }
     .hero-core::before { position: absolute; inset: 10px; content: ""; border: 1px solid rgba(255, 109, 90, .4); border-radius: 25px; }
     .hero-core span { color: var(--gold); font-size: 30px; line-height: 1; }
-    .hero-core strong { margin-top: -18px; font-family: "Clash Display", sans-serif; font-size: 29px; letter-spacing: -.05em; }
+    .hero-core strong { margin-top: -18px; font-family: "Avenir Next", "Avenir", sans-serif; font-size: 29px; letter-spacing: -.05em; }
     .hero-core small { margin-top: -27px; color: rgba(251, 250, 246, .58); font-family: "JetBrains Mono", monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
     .orbit-chip { position: absolute; padding: 10px 13px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; color: rgba(251, 250, 246, .82); background: rgba(17, 22, 21, .76); box-shadow: 0 10px 20px rgba(0, 0, 0, .18); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
     .chip-one { top: 17%; right: 7%; }
@@ -255,7 +253,7 @@
     .parts-copy .formula-callout { margin-top: 24px; }
     .parts-stage { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center; min-height: 330px; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: var(--paper-deep); }
     .part-chip { min-height: 94px; padding: 15px; border: 1px solid rgba(24, 65, 44, .14); border-radius: 15px; background: rgba(251, 250, 246, .84); }
-    .part-chip strong { display: block; margin-top: 11px; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 22px; letter-spacing: -.04em; }
+    .part-chip strong { display: block; margin-top: 11px; color: var(--forest); font-family: "Avenir Next", "Avenir", sans-serif; font-size: 22px; letter-spacing: -.04em; }
     .part-chip span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.2; }
     .part-chip .part-number { margin: 0; color: var(--coral); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .1em; }
     .part-chip.center { border-color: rgba(255, 109, 90, .45); background: var(--canvas); }
@@ -282,7 +280,7 @@
     .map-step::after { position: absolute; top: 50%; right: -7px; z-index: 3; width: 12px; height: 12px; content: ""; border-top: 1px solid var(--coral); border-right: 1px solid var(--coral); background: var(--paper); transform: translateY(-50%) rotate(45deg); }
     .map-step:last-child::after { display: none; }
     .map-step .step-number { color: var(--coral); font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: .12em; }
-    .map-step strong { display: block; margin-top: 30px; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 25px; letter-spacing: -.04em; }
+    .map-step strong { display: block; margin-top: 30px; color: var(--forest); font-family: "Avenir Next", "Avenir", sans-serif; font-size: 25px; letter-spacing: -.04em; }
     .map-step span { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; line-height: 1.25; }
     .map-boundary { margin-top: 19px; padding: 14px 18px; border-radius: 12px; color: var(--forest); background: var(--sage); font-size: 14px; line-height: 1.25; }
     .map-boundary strong { color: var(--coral-dark); }
