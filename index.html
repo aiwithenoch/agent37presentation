@@ -997,12 +997,12 @@
           </div>
         </article>
 
-        <article class="slide paper config-slide" data-title="AGENTS.md" data-notes="AGENTS.md is the operating manual for this assistant: the mission, working style, safety rules, and scope. For this build, write the prompt around a personal executive assistant for Franky 5: prepare, prioritize, and follow through. Keep the research-based identity in USER.md, and use AGENTS.md for behavior. Never invent a guest, quote, schedule, or commitment; ask before sending or publishing. Public profile sources checked 2026-09-17: https://max.com.gh/franky-5-enstooled-guantuahene-of-abiriw-akuapem/ ; https://www.citinewsroom.com/2024/06/the-chat-im-the-one-who-rebranded-nacee-franky-5/ .">
+        <article class="slide paper config-slide" data-title="AGENTS.md" data-notes="AGENTS.md is the workspace rulebook for this assistant: the mission, working style, safety rules, and scope. OpenClaw injects its contents into the system prompt's Project Context on a new session. For this build, write the instructions around a personal executive assistant for Franky 5: prepare, prioritize, and follow through. Keep the research-based identity in USER.md, and use AGENTS.md for behavior. Never invent a guest, quote, schedule, or commitment; ask before sending or publishing. Official OpenClaw source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/context.md . Public profile sources: https://max.com.gh/franky-5-enstooled-guantuahene-of-abiriw-akuapem/ ; https://www.citinewsroom.com/2024/06/the-chat-im-the-one-who-rebranded-nacee-franky-5/ .">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE CONFIGURATION</span>
             <h2 class="reveal" style="--delay:.12s"><span class="config-name">AGENTS.md</span> <em class="config-title-accent">the rulebook.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">The prompt and description that tell the assistant what job it is here to do.</p>
+            <p class="body-copy reveal" style="--delay:.2s">The workspace rulebook that OpenClaw loads into the agent's system context.</p>
           </div>
           <div class="config-layout reveal" style="--delay:.3s">
             <section class="config-file-panel">
@@ -1018,12 +1018,12 @@
           </div>
         </article>
 
-        <article class="slide paper config-slide prompt-slide" data-title="AGENTS.md — Working Prompt" data-notes="This is the first working draft of AGENTS.md for the Franky 5 assistant. It turns the explanation from the previous slide into instructions we can actually place in the workspace. Keep the job narrow: private executive support for preparation, research, follow-up, and briefings. The assistant must separate facts from assumptions and ask before sending, publishing, booking, or changing anything external.">
+        <article class="slide paper config-slide prompt-slide" data-title="AGENTS.md — System Instructions" data-notes="This is the first working draft of AGENTS.md for the Franky 5 assistant. It is the workspace instruction file that OpenClaw injects into the system prompt's Project Context; it is not the entire system prompt. OpenClaw also assembles tools, runtime information, skills, and other context around it. Source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/context.md . Keep the job narrow: private executive support for preparation, research, follow-up, and briefings. The assistant must separate facts from assumptions and ask before sending, publishing, booking, or changing anything external.">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE FILE WE WILL USE</span>
-            <h2 class="reveal" style="--delay:.12s"><span class="config-name">AGENTS.md</span> <em class="config-title-accent">the working prompt.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">This is the real starting instruction for F5, our private executive assistant for Franky 5.</p>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">AGENTS.md</span> <em class="config-title-accent">the system instructions.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">This is the actual workspace instruction file that becomes part of F5's system context.</p>
           </div>
           <div class="config-layout reveal" style="--delay:.3s">
             <section class="config-file-panel">
@@ -1034,7 +1034,7 @@
               <div class="config-point"><span class="config-point-index">01</span><div><strong>Job</strong><p>Give F5 a clear job: help Franky prepare and follow through.</p></div></div>
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Behavior</strong><p>Keep the work useful, short, and grounded in what is known.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Human check</strong><p>F5 can prepare work, but Franky approves anything public or external.</p></div></div>
-              <div class="config-foot"><strong>What we will do:</strong> copy this prompt into the agent workspace, then test it with one real task.</div>
+              <div class="config-foot"><strong>What we will do:</strong> place this file in the workspace, then test the resulting system behavior with one real task.</div>
             </div>
           </div>
         </article>
