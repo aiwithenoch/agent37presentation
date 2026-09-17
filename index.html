@@ -364,6 +364,9 @@
     .workspace-tree .tree-path { color: var(--forest); font-weight: 700; }
     .workspace-tree .tree-file { color: var(--ink); font-weight: 600; }
     .workspace-tree .tree-note { color: var(--muted); font-size: .86em; }
+    .workspace-optional { position: absolute; right: 24px; bottom: 16px; left: 24px; display: flex; align-items: center; justify-content: center; gap: 7px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .05em; text-transform: uppercase; }
+    .workspace-optional strong { color: var(--forest); font-weight: 700; }
+    .workspace-optional .optional-dot { color: var(--gold); }
     .workspace-key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .workspace-key-item { min-height: 76px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: rgba(244, 241, 233, .56); }
     .workspace-key-item strong { display: block; color: var(--forest); font-family: "Clash Display", sans-serif; font-size: 18px; letter-spacing: -.03em; }
@@ -725,6 +728,7 @@
       .workspace-toolbar strong { font-size: 17px; }
       .workspace-toolbar .workspace-state { font-size: 7px; }
       .workspace-tree { width: 100%; font-size: 11px; line-height: 1.55; overflow-x: auto; }
+      .workspace-optional { right: 16px; bottom: 12px; left: 16px; font-size: 7px; }
       .workspace-key { grid-template-columns: 1fr; }
       .config-layout { display: block; }
       .config-file-panel { min-height: 0; padding: 20px 20px 18px; }
@@ -960,7 +964,7 @@
           <div class="assistant-footer formula-callout reveal" style="--delay:.42s"><strong>Build target:</strong> one trusted assistant that helps Franky 5 stay ahead of the work.</div>
         </article>
 
-        <article class="slide paper" data-title="OpenClaw Workspace Anatomy" data-notes="This is the OpenClaw workspace anatomy: the parts that give the agent instructions, identity, memory, and skills. Make the distinction explicit: Agent 37 is the hosted runtime where OpenClaw stays running; this workspace is the editable configuration and context that gives the agent its shape. Walk through AGENTS.md as the operating manual, SOUL.md and IDENTITY.md as the agent's character, USER.md as Franky 5's profile, MEMORY.md and memory/ as continuity, and skills/ as capabilities it can load when needed. BOOTSTRAP.md is a one-time first-run ritual; BOOT.md is an optional startup checklist when the boot-md hook is enabled. Do not call this folder the runtime. Do not present TOOLS.md or HEARTBEAT.md as current core files. Sources checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md ; https://github.com/openclaw/openclaw/blob/main/docs/reference/token-use.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+        <article class="slide paper" data-title="OpenClaw Workspace Anatomy" data-notes="This is the OpenClaw workspace anatomy: the parts that give the agent instructions, identity, memory, and skills. Make the distinction explicit: Agent 37 is the hosted runtime where OpenClaw stays running; this workspace is the editable configuration and context that gives the agent its shape. Walk through AGENTS.md as the operating manual, SOUL.md and IDENTITY.md as the agent's character, USER.md as Franky 5's profile, MEMORY.md and memory/ as continuity, and skills/ as capabilities it can load when needed. BOOTSTRAP.md is a one-time first-run ritual; BOOT.md is an optional startup checklist when the boot-md hook is enabled. TOOLS.md and HEARTBEAT.md are optional extensions: tool guidance and heartbeat monitoring, not core injected files. Sources checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent.md ; https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md ; https://github.com/openclaw/openclaw/blob/main/docs/gateway/heartbeat.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">OPENCLAW WORKSPACE</span>
@@ -970,7 +974,7 @@
           <div class="workspace-layout reveal" style="--delay:.28s">
             <section class="workspace-panel" aria-label="OpenClaw workspace file tree">
               <div class="workspace-toolbar">
-                <span class="workspace-state">AGENT CONFIG</span>
+                <span class="workspace-state">CORE + OPTIONAL</span>
               </div>
               <pre class="workspace-tree">├── <span class="tree-file">AGENTS.md</span>       <span class="tree-note">rules for how the agent should work</span>
 ├── <span class="tree-file">SOUL.md</span>         <span class="tree-note">the agent's personality and boundaries</span>
@@ -983,6 +987,7 @@
 │   └── <span class="tree-file">YYYY-MM-DD.md</span> <span class="tree-note">notes from a specific day</span>
 └── <span class="tree-file">skills/</span>         <span class="tree-note">extra abilities for the agent</span>
     └── <span class="tree-file">&lt;skill-name&gt;/SKILL.md</span> <span class="tree-note">steps for using one ability</span></pre>
+              <div class="workspace-optional"><span>Optional extensions:</span><strong>TOOLS.md</strong><span class="optional-dot">·</span><strong>HEARTBEAT.md</strong></div>
             </section>
           </div>
         </article>
@@ -1178,6 +1183,48 @@
               <div class="config-point"><span class="config-point-index">02</span><div><strong>Clear trigger</strong><p>Explain when to load it and what information it needs.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Safe output</strong><p>Define what the skill returns and where approval is required.</p></div></div>
               <div class="config-foot green"><strong>Layman's version:</strong> skills are the assistant's recipe cards.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide" data-title="TOOLS.md" data-notes="TOOLS.md is an optional workspace note, not the tool registry. Use it to document how this particular assistant should use tools: safe inputs, preferred order, review points, and boundaries. Current OpenClaw docs say built-in tools are available subject to tool policy, and the Tools section of AGENTS.md does not control which tools exist. Never store API keys, passwords, or tokens in this file. Source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent.md ; https://github.com/openclaw/openclaw/blob/main/docs/gateway/config-tools.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">OPTIONAL EXTENSION</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">TOOLS.md</span> <em class="config-title-accent">the tool notes.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">Local guidance for using tools safely — not the toolbox itself.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel gold">
+              <div class="config-file-header"><div><span class="config-file-kicker">OPTIONAL WORKSPACE NOTE</span><strong>TOOLS.md</strong></div><span class="config-file-tag">DON'T STORE SECRETS</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">tool_notes:</span></span><span class="code-line">  what each tool is for</span><span class="code-line">  safe inputs and boundaries</span><span class="code-line">  preferred order of operations</span><span class="code-line">  where Franky's approval is needed</span><span class="code-line"><span class="code-key">never:</span> <span class="code-value">API keys, passwords, or tokens</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Guidance</strong><p>Write down how this assistant should use the tools it has.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Policy</strong><p>Actual tool access comes from the runtime and its permissions.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Secrets</strong><p>Keep credentials in the correct secret store, never in a workspace note.</p></div></div>
+              <div class="config-foot gold"><strong>Layman's version:</strong> a safety card for using the tools, not the tools themselves.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper config-slide" data-title="HEARTBEAT.md" data-notes="HEARTBEAT.md is optional and implementation-dependent. OpenClaw's current heartbeat docs describe heartbeat as a system-owned automation that runs a periodic main-session turn; the cadence and prompt are configured in heartbeat settings. If this workspace uses a heartbeat scratch file, keep it narrow: check for meaningful changes, surface something that needs attention, and stay silent when nothing changed. Source checked 2026-09-17: https://github.com/openclaw/openclaw/blob/main/docs/gateway/heartbeat.md ; https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">OPTIONAL EXTENSION</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">HEARTBEAT.md</span> <em class="config-title-accent">the monitor.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A narrow checklist for recurring attention — only when heartbeat is enabled.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">OPTIONAL MONITORING</span><strong>HEARTBEAT.md</strong></div><span class="config-file-tag">ONLY IF ENABLED</span></div>
+              <pre class="config-code"><span class="code-line"><span class="code-key">when enabled:</span></span><span class="code-line">  check schedule · open loops · blockers</span><span class="code-line">  surface only meaningful changes</span><span class="code-line">  ask before taking external action</span><span class="code-line"><span class="code-key">when quiet:</span> <span class="code-gold">NO_REPLY</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Monitor</strong><p>Look for something that genuinely needs Franky's attention.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Silence</strong><p>If nothing changed, do not create noise just to prove the agent is awake.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Control</strong><p>The heartbeat settings decide when it runs and what it is allowed to do.</p></div></div>
+              <div class="config-foot green"><strong>Layman's version:</strong> a quiet watchman, not a new personality file.</div>
             </div>
           </div>
         </article>
