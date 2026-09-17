@@ -1,6 +1,6 @@
 # Set Up Your Own AI Agent
 
-An HTML 7-slide workshop presentation built in the same style as the n8n Accra deck.
+An HTML 17-slide workshop presentation built in the same style as the n8n Accra deck.
 
 The platform-choice slide uses researched brand marks and corrected product names. Asset provenance and usage notes are in [LOGO_SOURCES.md](LOGO_SOURCES.md).
 
@@ -16,4 +16,4 @@ Controls:
 - `P`: presenter notes
 - `F`: fullscreen
 
-The deck currently stops after defining the product: an executive assistant for Franky 5. Later build and testing slides are intentionally omitted until the setup is complete.
+The deck currently stops after defining the product and mapping its OpenClaw configuration: an executive assistant for Franky 5. Later build and testing slides are intentionally omitted until the setup is complete.
