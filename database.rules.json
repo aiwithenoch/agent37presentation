@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "sessions": {
+      "$session": {
+        ".read": true,
+        ".write": false,
+        ".validate": "newData.hasChildren(['slide', 'updatedAt']) && newData.child('slide').isNumber() && newData.child('updatedAt').isString()"
+      }
+    }
+  }
+}

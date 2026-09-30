@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/watch/:session", "destination": "/index.html" },
+    { "source": "/present/:session", "destination": "/index.html" },
+    { "source": "/remote/:session", "destination": "/index.html" }
+  ]
+}
