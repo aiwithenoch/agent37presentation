@@ -71,12 +71,12 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translate3d(34px, 0, 0) scale(.988);
-      filter: blur(6px);
-      transition: opacity .45s var(--ease), transform .65s var(--ease), filter .45s var(--ease), visibility 0s linear .65s;
+      transform: none;
+      filter: none;
+      transition: none;
     }
 
-    .slide.is-before { transform: translate3d(-34px, 0, 0) scale(.988); }
+    .slide.is-before { transform: none; }
     .slide.is-active {
       z-index: 2;
       opacity: 1;
@@ -197,12 +197,9 @@
     .section-head { position: relative; z-index: 1; }
     .section-head h2 { margin-top: 16px; }
     .section-head .body-copy { margin-top: 18px; }
-    .reveal { opacity: 0; transform: translateY(16px); }
-    .is-active .reveal { animation: reveal .62s var(--ease) forwards; animation-delay: var(--delay, 0s); }
-    .pop { opacity: 0; transform: scale(.92); }
-    .is-active .pop { animation: pop .62s var(--ease) forwards; animation-delay: var(--delay, 0s); }
-    @keyframes reveal { to { opacity: 1; transform: none; } }
-    @keyframes pop { 0% { opacity: 0; transform: scale(.92); } 70% { opacity: 1; transform: scale(1.035); } 100% { opacity: 1; transform: scale(1); } }
+    /* Live presentation mode: change slides immediately with no blank frame,
+       fade, blur, or delayed content that can look like a blink on air. */
+    .reveal, .pop, .is-active .reveal, .is-active .pop { opacity: 1; transform: none; animation: none; }
 
     /* Cover */
     .cover { justify-content: center; }
