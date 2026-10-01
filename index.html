@@ -1742,55 +1742,7 @@
           </div>
         </article>
 
-        <article class="slide paper" data-title="Inside Agent 37: Memory + Files" data-notes="Now connect the skill idea to the Agent 37 workspace. Agent 37 is the hosted runtime; the workspace files give F5 its instructions, memory, working material, and loadable skills. Keep the distinction clear: the runtime is where the agent runs, while the workspace is what gives it context. The OpenClaw workspace documentation describes files such as AGENTS.md, MEMORY.md, daily memory notes, and skills as separate parts of the workspace model. Source: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
-          <div class="slide-number"></div>
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">THE AGENT WORKSPACE</span>
-            <h2 class="reveal" style="--delay:.12s">Inside Agent 37:<br><em>memory and files.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">The runtime keeps F5 available. The workspace gives F5 the context it needs to do useful work.</p>
-          </div>
-          <div class="workspace-layout reveal" style="--delay:.28s">
-            <section class="workspace-panel">
-              <div class="workspace-toolbar"><span class="workspace-glyph">⌘</span><strong>F5 workspace</strong><span class="workspace-state">AGENT 37 · LIVE</span></div>
-              <pre class="workspace-tree"><span class="tree-path">Agent 37 / workspace/</span>
-├── <span class="tree-file">AGENTS.md</span>      <span class="tree-note">how F5 should operate</span>
-├── <span class="tree-file">MEMORY.md</span>      <span class="tree-note">durable context</span>
-├── <span class="tree-file">memory/</span>        <span class="tree-note">dated working notes</span>
-├── <span class="tree-file">files/</span>         <span class="tree-note">briefs, docs, images</span>
-└── <span class="tree-file">skills/</span>        <span class="tree-note">loadable capabilities</span></pre>
-              <div class="workspace-optional"><span class="optional-dot">●</span><strong>Agent 37</strong><span>is the place that keeps the workspace running</span></div>
-            </section>
-            <div class="workspace-key">
-              <div class="workspace-key-item"><strong>Memory</strong><p>what should carry forward</p></div>
-              <div class="workspace-key-item"><strong>Files</strong><p>what F5 can work with</p></div>
-              <div class="workspace-key-item"><strong>Skills</strong><p>how F5 handles a job</p></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="slide paper" data-title="Memory and Files Do Different Jobs" data-notes="Teach the distinction here. MEMORY.md is a curated durable summary: stable preferences, important decisions, and facts worth carrying into future sessions. The memory/ folder holds dated notes and time-bound continuity. Files are working material: briefs, scripts, images, documents, and other artifacts that F5 may inspect or edit within its approved workspace. Memory is not a dumping ground, and files are not automatically trusted facts. Read before editing and verify what matters. Source: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
-          <div class="slide-number"></div>
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">CONTEXT LAYERS</span>
-            <h2 class="reveal" style="--delay:.12s">Memory and files<br><em>do different jobs.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">One carries continuity. The other carries the working material for today.</p>
-          </div>
-          <div class="two-up reveal" style="--delay:.3s">
-            <section class="contrast-card agent">
-              <span class="kicker">MEMORY</span>
-              <h3>Remember what matters.</h3>
-              <ul><li>stable preferences and identity</li><li>approved decisions and commitments</li><li>daily notes that can be retrieved</li><li>curated context for future sessions</li></ul>
-            </section>
-            <section class="contrast-card">
-              <span class="kicker">FILES</span>
-              <h3>Work with what exists.</h3>
-              <ul><li>briefs, scripts, images, and documents</li><li>source material for a current task</li><li>artifacts F5 can read or edit</li><li>inspect first; never assume the file is right</li></ul>
-            </section>
-          </div>
-          <div class="formula-callout reveal" style="--delay:.42s"><strong>Memory is continuity.</strong> Files are working material. Skills explain how to use both safely.</div>
-        </article>
-
-        <article class="slide paper" data-title="Schedules: How It Works" data-notes="Introduce schedules as a separate layer from skills and memory. A schedule decides when the agent should wake up; it does not replace the agent's instructions or create a new skill. OpenClaw automations persist jobs, wake the agent at the right time, and can deliver output to a channel, webhook, or nowhere. Schedule types include one-shot at, fixed every intervals, and cron expressions; timestamps without a timezone are UTC unless a timezone is supplied. Sources: https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md ; https://docs.openclaw.ai/automation/cron-jobs/schedules .">
+        <article class="slide paper" data-title="Schedules: How It Works" data-notes="Introduce schedules as a separate layer from skills. A schedule decides when the agent should wake up; it does not replace the agent's instructions or create a new skill. OpenClaw automations persist jobs, wake the agent at the right time, and can deliver output to a channel, webhook, or nowhere. Schedule types include one-shot at, fixed every intervals, and cron expressions; timestamps without a timezone are UTC unless a timezone is supplied. Sources: https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md ; https://docs.openclaw.ai/automation/cron-jobs/schedules .">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE TIME LAYER</span>
@@ -1800,7 +1752,7 @@
           <div class="flow-map reveal" style="--delay:.3s">
             <div class="map-step"><span class="step-number">01 · DEFINE</span><strong>When?</strong><span>Choose a time, interval, or event.</span></div>
             <div class="map-step"><span class="step-number">02 · WAKE</span><strong>Start</strong><span>The scheduler triggers the run.</span></div>
-            <div class="map-step"><span class="step-number">03 · LOAD</span><strong>Context</strong><span>Bring in the right files and skill.</span></div>
+            <div class="map-step"><span class="step-number">03 · LOAD</span><strong>Context</strong><span>Bring in the right context and skill.</span></div>
             <div class="map-step"><span class="step-number">04 · ACT</span><strong>Work</strong><span>Use tools within the boundaries.</span></div>
             <div class="map-step"><span class="step-number">05 · DELIVER</span><strong>Return</strong><span>Send the result, or stay quiet.</span></div>
           </div>
@@ -1841,7 +1793,7 @@
               <span class="canvas-label">EXAMPLE · DAILY SHOW PREP · 08:00 ACCRA</span>
               <div class="canvas-flow">
                 <div class="node trigger"><span class="node-type">TRIGGER</span><strong>Wake</strong><small>the schedule fires</small></div>
-                <div class="node agent"><span class="node-type">AGENT</span><strong>Load context</strong><small>files + show-prep skill</small></div>
+                <div class="node agent"><span class="node-type">AGENT</span><strong>Load context</strong><small>context + show-prep skill</small></div>
                 <div class="node tool"><span class="node-type">TOOLS</span><strong>Research</strong><small>gather and verify</small></div>
                 <div class="node review"><span class="node-type">OUTPUT</span><strong>Brief</strong><small>deliver or stay quiet</small></div>
               </div>
@@ -1855,19 +1807,18 @@
           </div>
         </article>
 
-        <article class="slide dark close" data-title="Skills + Memory + Schedules" data-notes="Close this chapter by showing the relationship between the layers. Skills give the agent a method. Memory gives it continuity. Files give it working material. Schedules decide when it should wake. Tools let it act. The agent coordinates the pieces and keeps the human approval boundary visible. The next practical step is to choose one real job and build one small skill around it — for example, show preparation, briefing, or follow-up. This closes the teaching sequence and opens the workshop build.">
+        <article class="slide dark close" data-title="Skills + Schedules" data-notes="Close this chapter by showing the relationship between the layers. Skills give the agent a method. Schedules decide when it should wake. Tools let it act. The agent coordinates the pieces and keeps the human approval boundary visible. The next practical step is to choose one real job and build one small skill around it — for example, show preparation, briefing, or follow-up. This closes the teaching sequence and opens the workshop build.">
           <div class="slide-number"></div>
           <div class="close-grid">
             <div>
               <span class="eyebrow reveal" style="--delay:.05s">THE PATTERN</span>
               <h2 class="reveal" style="--delay:.13s">Make the agent<br><em>useful over time.</em></h2>
-              <p class="reveal" style="--delay:.24s">The parts work together: skills know how, memory remembers what matters, and schedules know when to wake.</p>
+              <p class="reveal" style="--delay:.24s">The parts work together: skills know how, and schedules know when to wake.</p>
               <div class="close-foot reveal" style="--delay:.34s">Next: build one skill for one real job</div>
             </div>
             <div class="close-checks reveal" style="--delay:.3s">
               <div class="close-check"><b>01</b><strong>Skills · know how</strong></div>
-              <div class="close-check"><b>02</b><strong>Memory · carry context</strong></div>
-              <div class="close-check"><b>03</b><strong>Schedules · wake on time</strong></div>
+              <div class="close-check"><b>02</b><strong>Schedules · wake on time</strong></div>
             </div>
           </div>
         </article>
