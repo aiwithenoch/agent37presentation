@@ -1088,6 +1088,34 @@
           <div class="platform-footer formula-callout reveal" style="--delay:.42s"><strong>Next:</strong> open the demo route: OpenClaw on Agent 37.</div>
         </article>
 
+        <article class="slide paper schedule-slide schedule-create-slide" data-title="Skill Creator" data-notes="Use the supplied Skill Creator screen as the concrete example of a skill-building tool. It can create new skills, improve existing skills, and measure skill performance. Connect it to the lesson: a skill is not just a prompt; it is a reusable procedure that can be tested and improved. Screenshot supplied by Enoch from the skill-creator entry created by Anthropic.">
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE NEXT CAPABILITY</span>
+            <h2 class="reveal" style="--delay:.12s">Create, improve,<br><em>measure a skill.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A skill becomes useful when its procedure can be created, refined, and tested against real work.</p>
+          </div>
+          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Skill Creator capability screen">
+            <img src="/assets/skill-creator.png" alt="Skill Creator by Anthropic, with tools to create, improve, and measure agent skills">
+          </div>
+        </article>
+
+        <article class="slide paper" data-title="Five Essential Assistant Skills" data-notes="These five community skills are the shortlist for a personal-assistant agent. Todo by Agenticio handles tasks, reminders, commitments, and next actions with local-only storage: https://clawhub.ai/agenticio/skills/todo . Calendar Scheduling by Billy Lui checks availability, time zones, double-booking, and confirmation before booking: https://clawhub.ai/billylui/skills/calendar-scheduling . Inbox Zero Warrior triages email exports into urgency, action, and draft replies without sending mail itself: https://clawhub.ai/voronindenis5/skills/inbox-zero-warrior . Daily Briefing by sai-sh combines weather, calendar, email, and tasks, but needs connected credentials: https://clawhub.ai/sai-sh/skills/user-briefing . Personal CRM by Matthew Poe keeps relationship cadence, birthdays, touchpoints, and follow-up notes local: https://clawhub.ai/matthewpoe/skills/personal-crm . Review each SKILL.md, scripts, permissions, and secrets before installing any community skill.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">A PERSONAL-ASSISTANT STARTER SET</span>
+            <h2 class="reveal" style="--delay:.12s">Five skills that make<br><em>an assistant useful.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">Choose the repeatable jobs first. Add the community skill only after its instructions and permissions make sense.</p>
+          </div>
+          <div class="flow-map reveal" style="--delay:.3s">
+            <div class="map-step"><span class="step-number">01 · ACT</span><strong>Todo</strong><span>Tasks, reminders, commitments, and next actions.<br><code>@agenticio/todo</code></span></div>
+            <div class="map-step"><span class="step-number">02 · TIME</span><strong>Calendar</strong><span>Availability, time zones, and confirmation before booking.<br><code>@billylui/calendar-scheduling</code></span></div>
+            <div class="map-step"><span class="step-number">03 · INBOX</span><strong>Email triage</strong><span>Urgency, action, and draft replies — no auto-send.<br><code>@voronindenis5/inbox-zero-warrior</code></span></div>
+            <div class="map-step"><span class="step-number">04 · CONTEXT</span><strong>Briefing</strong><span>Weather, calendar, email, and tasks in one start-of-day view.<br><code>@sai-sh/user-briefing</code></span></div>
+            <div class="map-step"><span class="step-number">05 · PEOPLE</span><strong>Personal CRM</strong><span>Birthdays, touchpoints, cadence, and follow-up memory.<br><code>@matthewpoe/personal-crm</code></span></div>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Safety rule:</strong> inspect the skill, its scripts, its permissions, and its secrets before you install it.</div>
+        </article>
+
         <article class="slide paper" data-title="OpenClaw on Agent 37" data-notes="Use this as the handoff into the live demo. We compared several ways to host or assemble an agent. For this workshop, we are setting up OpenClaw on Agent 37. Frame Agent 37 as the hosted runtime and OpenClaw as the agent environment we will configure. Do not imply that the two products are an official corporate partnership. Sources checked 2026-09-17: https://www.agent37.com/ ; https://www.openclaw.org/ . The local logo assets and their provenance are documented in LOGO_SOURCES.md. Next, explain what OpenClaw contributes: the agent harness.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1144,34 +1172,6 @@
             </section>
           </div>
           <div class="harness-footer formula-callout reveal" style="--delay:.42s"><strong>Simple picture:</strong> OpenClaw is the harness. Agent 37 is the place that keeps it running.</div>
-        </article>
-
-        <article class="slide paper schedule-slide schedule-create-slide" data-title="Skill Creator" data-notes="Use the supplied Skill Creator screen as the concrete example of a skill-building tool. It can create new skills, improve existing skills, and measure skill performance. Connect it to the lesson: a skill is not just a prompt; it is a reusable procedure that can be tested and improved. Screenshot supplied by Enoch from the skill-creator entry created by Anthropic.">
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">THE NEXT CAPABILITY</span>
-            <h2 class="reveal" style="--delay:.12s">Create, improve,<br><em>measure a skill.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">A skill becomes useful when its procedure can be created, refined, and tested against real work.</p>
-          </div>
-          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Skill Creator capability screen">
-            <img src="/assets/skill-creator.png" alt="Skill Creator by Anthropic, with tools to create, improve, and measure agent skills">
-          </div>
-        </article>
-
-        <article class="slide paper" data-title="Five Essential Assistant Skills" data-notes="These five community skills are the shortlist for a personal-assistant agent. Todo by Agenticio handles tasks, reminders, commitments, and next actions with local-only storage: https://clawhub.ai/agenticio/skills/todo . Calendar Scheduling by Billy Lui checks availability, time zones, double-booking, and confirmation before booking: https://clawhub.ai/billylui/skills/calendar-scheduling . Inbox Zero Warrior triages email exports into urgency, action, and draft replies without sending mail itself: https://clawhub.ai/voronindenis5/skills/inbox-zero-warrior . Daily Briefing by sai-sh combines weather, calendar, email, and tasks, but needs connected credentials: https://clawhub.ai/sai-sh/skills/user-briefing . Personal CRM by Matthew Poe keeps relationship cadence, birthdays, touchpoints, and follow-up notes local: https://clawhub.ai/matthewpoe/skills/personal-crm . Review each SKILL.md, scripts, permissions, and secrets before installing any community skill.">
-          <div class="slide-number"></div>
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">A PERSONAL-ASSISTANT STARTER SET</span>
-            <h2 class="reveal" style="--delay:.12s">Five skills that make<br><em>an assistant useful.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">Choose the repeatable jobs first. Add the community skill only after its instructions and permissions make sense.</p>
-          </div>
-          <div class="flow-map reveal" style="--delay:.3s">
-            <div class="map-step"><span class="step-number">01 · ACT</span><strong>Todo</strong><span>Tasks, reminders, commitments, and next actions.<br><code>@agenticio/todo</code></span></div>
-            <div class="map-step"><span class="step-number">02 · TIME</span><strong>Calendar</strong><span>Availability, time zones, and confirmation before booking.<br><code>@billylui/calendar-scheduling</code></span></div>
-            <div class="map-step"><span class="step-number">03 · INBOX</span><strong>Email triage</strong><span>Urgency, action, and draft replies — no auto-send.<br><code>@voronindenis5/inbox-zero-warrior</code></span></div>
-            <div class="map-step"><span class="step-number">04 · CONTEXT</span><strong>Briefing</strong><span>Weather, calendar, email, and tasks in one start-of-day view.<br><code>@sai-sh/user-briefing</code></span></div>
-            <div class="map-step"><span class="step-number">05 · PEOPLE</span><strong>Personal CRM</strong><span>Birthdays, touchpoints, cadence, and follow-up memory.<br><code>@matthewpoe/personal-crm</code></span></div>
-          </div>
-          <div class="formula-callout reveal" style="--delay:.42s"><strong>Safety rule:</strong> inspect the skill, its scripts, its permissions, and its secrets before you install it.</div>
         </article>
 
         <article class="slide paper" data-title="What We Are Building" data-notes="This slide defines the product we are building next: an executive assistant for Franky 5. Treat the three capabilities on the right as the first scope to validate, not a finished specification. Explain that the assistant should understand Franky's priorities, keep useful context, turn requests into follow-ups, and prepare briefings that make the next action clear. The live build will turn this product shape into the OpenClaw agent running on Agent 37.">
