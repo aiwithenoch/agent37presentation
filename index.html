@@ -1962,6 +1962,8 @@
       let realtimeStarted = false;
       let realtimeHydrated = false;
       let lastRemoteUpdatedAt = "";
+      let lastUserNavigationAt = 0;
+      let lastUserNavigationDirection = "";
 
       const pad = (value) => String(value).padStart(2, "0");
       slides.forEach((slide, index) => {
@@ -1999,6 +2001,14 @@
         if (direction || previous !== current) stage.dataset.direction = direction || (current > previous ? "next" : "prev");
       }
       function navigate(index, direction, options = {}) {
+        if (!options.fromRemote) {
+          const now = performance.now();
+          // A touchscreen can synthesize a second click after the original
+          // tap. Treat that as one presentation command, never two slides.
+          if (now - lastUserNavigationAt < 420 && direction === lastUserNavigationDirection) return;
+          lastUserNavigationAt = now;
+          lastUserNavigationDirection = direction;
+        }
         goTo(index, direction);
         // The first hash/render is local setup. Only publish after this copy has
         // hydrated from the shared session, so a newly opened screen can never
