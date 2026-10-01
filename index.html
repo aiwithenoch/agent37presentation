@@ -2210,7 +2210,13 @@
         else if (event.key === "?") showToast("← → navigate · G grid · P notes · F fullscreen");
         else if (event.key.toLowerCase() === "f") document.querySelector("#fullscreen-btn").click();
       });
-      window.addEventListener("hashchange", () => { const match = window.location.hash.match(/^#slide-(\d+)$/); if (match) navigate(Number(match[1]) - 1, Number(match[1]) - 1 > current ? "next" : "prev"); });
+      // Hash changes are display state only. They must never publish a slide:
+      // browser restore/reconnect behavior can change a hash without anyone
+      // pressing a presentation control, and a live deck must stay put.
+      window.addEventListener("hashchange", () => {
+        const match = window.location.hash.match(/^#slide-(\d+)$/);
+        if (match) goTo(Number(match[1]) - 1, Number(match[1]) - 1 > current ? "next" : "prev");
+      });
       buildOverview();
       buildRemoteGrid();
       const starting = window.location.hash.match(/^#slide-(\d+)$/);
