@@ -625,7 +625,6 @@
     .remote-footnote { margin-top: 20px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 9px; line-height: 1.45; }
     body.remote-mode { min-height: 100svh; overflow: auto; background: #eef1ec; }
     body.remote-mode .app { display: none; }
-    body.viewer-mode .controls { display: none; }
     body.viewer-mode .presenter-status { display: flex; margin-top: 10px; }
 
     /* White-first presentation mode */
@@ -1817,7 +1816,7 @@
     </div>
     <button class="remote-grid-toggle" id="remote-grid-toggle" type="button" aria-expanded="false">Grid / choose slide</button>
     <div class="remote-grid" id="remote-grid-panel" hidden></div>
-    <p class="remote-footnote">Read-only viewers use <strong>/watch/</strong>. Keep this controller link private because anyone with it can change the live slide.</p>
+    <p class="remote-footnote">This is a shared live deck. Everyone with the same presentation link can navigate it, and every open copy follows.</p>
   </section>
 
   <script>
@@ -1846,16 +1845,12 @@
 
       const query = new URLSearchParams(window.location.search);
       const pathParts = window.location.pathname.split("/").filter(Boolean);
-      const routeMode = pathParts[0] === "watch" ? "viewer" : pathParts[0] === "present" ? "presenter" : pathParts[0] === "remote" ? "remote" : null;
+      const routeMode = ["watch", "present", "remote"].includes(pathParts[0]) ? "shared" : null;
       const requestedMode = query.get("mode");
-      const mode = routeMode || (["viewer", "presenter", "remote"].includes(requestedMode) ? requestedMode : "local");
+      const isHosted = window.location.protocol === "http:" || window.location.protocol === "https:";
+      const mode = routeMode || (requestedMode === "local" || !isHosted ? "local" : "shared");
       const sessionId = (query.get("session") || (routeMode ? pathParts[1] : null) || "max-tv").replace(/[^a-zA-Z0-9_-]/g, "-").slice(0, 64) || "max-tv";
-      const isViewerMode = mode === "viewer";
-      const isControllerMode = mode === "presenter" || mode === "remote";
-      const isRemoteMode = mode === "remote";
-      const isRealtimeMode = isViewerMode || isControllerMode;
-      document.body.classList.toggle("viewer-mode", isViewerMode);
-      document.body.classList.toggle("remote-mode", isRemoteMode);
+      const isRealtimeMode = mode === "shared";
       let current = 0;
       let toastTimer;
       let touchStartX = null;
@@ -1901,9 +1896,8 @@
         if (direction || previous !== current) stage.dataset.direction = direction || (current > previous ? "next" : "prev");
       }
       function navigate(index, direction, options = {}) {
-        if (isViewerMode && !options.fromRemote) return;
         goTo(index, direction);
-        if (isControllerMode && !options.fromRemote) void publishCurrentSlide();
+        if (isRealtimeMode && !options.fromRemote) void publishCurrentSlide();
       }
       function next() { navigate(current + 1, "next"); }
       function previous() { navigate(current - 1, "prev"); }
@@ -1923,11 +1917,11 @@
         overview.classList.toggle("is-visible", visible);
         if (visible) notesPanel.classList.remove("is-visible");
       }
-      function toggleNotes() { if (isViewerMode) return; notesPanel.classList.toggle("is-visible"); overview.classList.remove("is-visible"); }
+      function toggleNotes() { notesPanel.classList.toggle("is-visible"); overview.classList.remove("is-visible"); }
       function showToast(message) { toast.textContent = message; toast.classList.add("is-visible"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 1600); }
 
       async function publishCurrentSlide() {
-        if (!isControllerMode) return false;
+        if (!isRealtimeMode) return false;
         try {
           const response = await fetch(apiUrl(), {
             method: "PUT",
@@ -1937,7 +1931,7 @@
           });
           const payload = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(payload.error || "Unable to publish slide");
-          setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
+          setConnection("connected", "Shared deck · broadcasting slide " + pad(current + 1));
           return true;
         } catch (error) {
           setConnection("error", error.message || "Presenter connection failed");
@@ -1957,8 +1951,7 @@
         const remoteSlide = Number(state.slide);
         if (!Number.isInteger(remoteSlide) || remoteSlide < 0 || remoteSlide >= slides.length) return;
         if (remoteSlide !== current) goTo(remoteSlide, remoteSlide > current ? "next" : "prev");
-        if (isViewerMode) setConnection("connected", "Live viewer · following presenter · slide " + pad(current + 1));
-        else if (isControllerMode) setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
+        if (isRealtimeMode) setConnection("connected", "Shared deck · synced at slide " + pad(current + 1));
       }
 
       function consumeFirebaseEvent(event) {
@@ -1983,8 +1976,7 @@
         eventSource.addEventListener("auth_revoked", () => { setConnection("error", "Realtime stream authorization was revoked"); startPolling(); });
         eventSource.onopen = () => {
           if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-          if (isViewerMode) setConnection("connected", "Live viewer · following presenter · slide " + pad(current + 1));
-          else setConnection("connected", isRemoteMode ? "Live deck ready · controller active" : "Live deck ready · ready to broadcast");
+          setConnection("connected", "Shared deck connected · slide " + pad(current + 1));
         };
         eventSource.onerror = () => { setConnection("error", "Reconnecting to the live deck…"); startPolling(); };
       }
@@ -2002,7 +1994,7 @@
             if (realtimeDatabaseUrl) startFirebaseStream();
             else startPolling();
           }
-          if (!eventSource && !isViewerMode) setConnection("connected", (isRemoteMode ? "Controller ready" : "Presenter ready") + " · broadcasting slide " + pad(current + 1));
+          if (!eventSource) setConnection("connected", "Shared deck ready · slide " + pad(current + 1));
         } catch (error) {
           setConnection("error", error.message || "Realtime backend is not configured");
           startPolling();
@@ -2076,23 +2068,15 @@
       updateClock();
       setInterval(updateClock, 1000);
 
-      if (isViewerMode || isControllerMode) {
+      if (isRealtimeMode) {
         presenterStatus.hidden = false;
         presenterStatus.classList.add("is-visible");
-        modeBadge.textContent = isViewerMode ? "LIVE VIEWER" : isRemoteMode ? "REMOTE" : "PRESENTER";
-        modeBadge.classList.toggle("viewer", isViewerMode);
+        modeBadge.textContent = "SHARED LIVE";
+        modeBadge.classList.remove("viewer");
         remoteSession.textContent = sessionId;
-        document.title = (isViewerMode ? "Watch" : isRemoteMode ? "Remote" : "Present") + " · " + sessionId + " — AI With Enoch";
-        if (isViewerMode) {
-          setConnection("connecting", "Connecting to the live deck…");
-        } else {
-          setConnection("connecting", isRemoteMode ? "Connecting controller…" : "Local deck · ready to broadcast");
-        }
+        document.title = "Live · " + sessionId + " — AI With Enoch";
+        setConnection("connecting", "Connecting to the shared deck…");
         void fetchRemoteState();
-      }
-      if (isRemoteMode) {
-        remoteShell.hidden = false;
-        updateRemoteIndicator();
       }
     })();
   </script>

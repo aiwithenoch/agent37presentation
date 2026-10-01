@@ -16,15 +16,15 @@ Controls:
 - `P`: presenter notes
 - `F`: fullscreen
 
-## Remote presentation control
+## Shared live presentation
 
-The same deck can be opened in three modes for a named session:
+The production deck is one shared live presentation. Give everyone the same link:
 
-- Viewer: `https://agent37presentation.vercel.app/watch/max-tv`
-- Presenter deck: `https://agent37presentation.vercel.app/present/max-tv`
-- Mobile remote: `https://agent37presentation.vercel.app/remote/max-tv`
+```text
+https://agent37presentation.vercel.app/present/max-tv
+```
 
-The viewer is read-only and follows the presenter's current slide through the lightweight Agent 37 realtime service. The presenter deck keeps the existing keyboard, fullscreen, notes, grid, animation, touch, and Accra-clock behavior. The remote is a compact mobile controller with Previous, Next, Grid, and a current-slide indicator. There is no presenter-key prompt: keep the controller URL private because anyone who has it can change the live slide.
+Every open copy can use Previous, Next, keyboard, touch, or Grid. A change on any copy is broadcast to every other copy, and changes made by another viewer move your copy too. The root URL also uses the shared `max-tv` session. The old `/watch/max-tv` and `/remote/max-tv` paths remain as aliases to the same collaborative deck; they are not read-only or separate controllers.
 
 ### Realtime backend
 
@@ -34,8 +34,8 @@ The current production API proxies to the Agent 37 service at:
 https://edffdb9736d9a48a900b.agent37.app
 ```
 
-It serves GET, PUT, and Server-Sent Events for `/sessions/:session.json` on port 3000. The Vercel API route publishes controller changes, and viewers subscribe to the live stream. There are no Vercel environment variables required for the current setup. If the service is moved, set `REALTIME_BACKEND_URL` in the Vercel production environment and redeploy.
+It serves GET, PUT, and Server-Sent Events for `/sessions/:session.json` on port 3000. The Vercel API route publishes navigation from any shared copy, and every copy subscribes to the same live stream. There are no Vercel environment variables required for the current setup. If the service is moved, set `REALTIME_BACKEND_URL` in the Vercel production environment and redeploy.
 
-Open the presenter or remote URL to control the deck, and share only the `/watch/max-tv` URL with viewers.
+Keep the Agent 37 realtime service running. There is intentionally no presenter key: anyone who has the shared link can navigate the shared deck.
 
 The deck currently stops after defining the product and mapping its OpenClaw configuration, including working-prompt pairs for each file and optional `TOOLS.md` and `HEARTBEAT.md` extensions: an executive assistant for Franky 5. Later build and testing slides are intentionally omitted until the setup is complete.
