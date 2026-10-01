@@ -1957,7 +1957,11 @@
       let realtimeDatabaseUrl = DEFAULT_REALTIME_BACKEND_URL;
       let eventSource = null;
       let pollTimer = null;
+      let streamRetryTimer = null;
+      let pollInFlight = false;
       let realtimeStarted = false;
+      let realtimeHydrated = false;
+      let lastRemoteUpdatedAt = "";
 
       const pad = (value) => String(value).padStart(2, "0");
       slides.forEach((slide, index) => {
@@ -1996,7 +2000,10 @@
       }
       function navigate(index, direction, options = {}) {
         goTo(index, direction);
-        if (isRealtimeMode && !options.fromRemote) void publishCurrentSlide();
+        // The first hash/render is local setup. Only publish after this copy has
+        // hydrated from the shared session, so a newly opened screen can never
+        // overwrite the live deck while it is connecting.
+        if (isRealtimeMode && !options.fromRemote && realtimeHydrated) void publishCurrentSlide();
       }
       function next() { navigate(current + 1, "next"); }
       function previous() { navigate(current - 1, "prev"); }
@@ -2054,6 +2061,9 @@
         if (!state || typeof state !== "object") return;
         const remoteSlide = Number(state.slide);
         if (!Number.isInteger(remoteSlide) || remoteSlide < 0 || remoteSlide >= slides.length) return;
+        const updatedAt = String(state.updatedAt || "");
+        if (updatedAt && lastRemoteUpdatedAt && updatedAt < lastRemoteUpdatedAt) return;
+        if (updatedAt) lastRemoteUpdatedAt = updatedAt;
         if (remoteSlide !== current) goTo(remoteSlide, remoteSlide > current ? "next" : "prev");
         if (isRealtimeMode) setConnection("connected", "Shared deck · synced at slide " + pad(current + 1));
       }
@@ -2067,26 +2077,54 @@
 
       function startPolling() {
         if (pollTimer || !isRealtimeMode) return;
-        pollTimer = setInterval(() => { void fetchRemoteState(); }, 1800);
+        // Keep a heartbeat even when SSE is open. This covers captive portals,
+        // sleeping TVs, proxy timeouts, and silent EventSource disconnects.
+        pollTimer = setInterval(() => { void fetchRemoteState(); }, 1200);
+      }
+
+      function retryRealtimeStream() {
+        startPolling();
+        clearTimeout(streamRetryTimer);
+        streamRetryTimer = setTimeout(() => {
+          streamRetryTimer = null;
+          if (!eventSource && realtimeDatabaseUrl) startFirebaseStream();
+        }, 2500);
       }
 
       function startFirebaseStream() {
         if (!realtimeDatabaseUrl || eventSource || !window.EventSource) { if (!window.EventSource) startPolling(); return; }
         const streamUrl = realtimeDatabaseUrl.replace(/\/+$/, "") + "/sessions/" + encodeURIComponent(sessionId) + ".json";
-        eventSource = new EventSource(streamUrl);
-        eventSource.addEventListener("put", consumeFirebaseEvent);
-        eventSource.addEventListener("patch", consumeFirebaseEvent);
-        eventSource.addEventListener("cancel", () => { setConnection("error", "Realtime stream was cancelled"); startPolling(); });
-        eventSource.addEventListener("auth_revoked", () => { setConnection("error", "Realtime stream authorization was revoked"); startPolling(); });
-        eventSource.onopen = () => {
-          if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        const stream = new EventSource(streamUrl);
+        eventSource = stream;
+        stream.addEventListener("put", consumeFirebaseEvent);
+        stream.addEventListener("patch", consumeFirebaseEvent);
+        stream.addEventListener("cancel", () => {
+          setConnection("error", "Reconnecting to the live deck…");
+          stream.close();
+          if (eventSource === stream) eventSource = null;
+          retryRealtimeStream();
+        });
+        stream.addEventListener("auth_revoked", () => {
+          setConnection("error", "Reconnecting to the live deck…");
+          stream.close();
+          if (eventSource === stream) eventSource = null;
+          retryRealtimeStream();
+        });
+        stream.onopen = () => {
           setConnection("connected", "Shared deck connected · slide " + pad(current + 1));
         };
-        eventSource.onerror = () => { setConnection("error", "Reconnecting to the live deck…"); startPolling(); };
+        stream.onerror = () => {
+          setConnection("error", "Reconnecting to the live deck…");
+          stream.close();
+          if (eventSource === stream) eventSource = null;
+          retryRealtimeStream();
+        };
       }
 
       async function fetchRemoteState() {
         if (!isRealtimeMode) return;
+        if (pollInFlight) return;
+        pollInFlight = true;
         try {
           let response = await fetch(realtimeSessionUrl(), { cache: "no-store" });
           let backendState = await response.json().catch(() => null);
@@ -2100,13 +2138,16 @@
           applyRemoteState(payload.state);
           if (!realtimeStarted) {
             realtimeStarted = true;
+            realtimeHydrated = true;
+            startPolling();
             if (realtimeDatabaseUrl) startFirebaseStream();
-            else startPolling();
           }
           if (!eventSource) setConnection("connected", "Shared deck ready · slide " + pad(current + 1));
         } catch (error) {
           setConnection("error", error.message || "Realtime backend is not configured");
           startPolling();
+        } finally {
+          pollInFlight = false;
         }
       }
 
