@@ -267,6 +267,8 @@
       border-radius: 14px;
       box-shadow: 0 10px 24px rgba(24, 65, 44, .12);
     }
+    .schedule-create-slide .section-head { margin-bottom: 0; }
+    .schedule-create-slide .schedule-visual img { object-fit: contain; background: #fff; }
 
     /* Five parts */
     .parts-layout { display: grid; grid-template-columns: .72fr 1.28fr; align-items: center; gap: 34px; margin-top: 26px; }
@@ -1679,6 +1681,17 @@
           </div>
           <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 Schedules interface">
             <img src="/assets/agent37-schedules.png" alt="Agent 37 Schedules page showing no schedules yet, starting points, and the New schedule action">
+          </div>
+        </article>
+
+        <article class="slide paper schedule-slide schedule-create-slide" data-title="How to Create a Schedule" data-notes="After showing the schedules overview, demonstrate the creation screen. Name the schedule, write the standing message the agent should receive, choose the cadence and time, confirm the Africa/Accra timezone, then create the schedule. The schedule is the instruction plus the moment it should run.">
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">NEXT STEP · AGENT 37</span>
+            <h2 class="reveal" style="--delay:.12s">How to create<br><em>a schedule.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">Name the schedule, write the standing instruction, choose when it runs, and confirm the timezone.</p>
+          </div>
+          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 create schedule form">
+            <img src="/assets/agent37-schedule-create.png" alt="Agent 37 create schedule form with message, weekdays, time, timezone, and Create schedule controls">
           </div>
         </article>
 
