@@ -931,6 +931,44 @@
       .controls .progress { order: 10; flex: 0 0 100%; width: 100%; }
       .control-hint { display: none; }
     }
+
+    /* Full-bleed desktop presentation: use the browser viewport, not a centered card. */
+    @media (min-width: 901px) {
+      body:not(.remote-mode) { overflow: hidden; }
+      body:not(.remote-mode) .app { display: block; width: 100%; height: 100svh; min-height: 100svh; padding: 0; }
+      body:not(.remote-mode) .stage-wrap { display: block; width: 100%; height: 100%; }
+      body:not(.remote-mode) .stage { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; }
+      body:not(.remote-mode) .controls {
+        position: fixed;
+        right: 18px;
+        bottom: 12px;
+        left: 18px;
+        z-index: 40;
+        width: auto;
+        margin: 0;
+        padding: 6px 8px;
+        border: 1px solid rgba(24, 65, 44, .12);
+        border-radius: 14px;
+        background: rgba(251, 250, 246, .86);
+        box-shadow: 0 10px 28px rgba(24, 65, 44, .12);
+        backdrop-filter: blur(12px);
+      }
+    }
+
+    /* Wide displays have room for larger projected type. */
+    @media (min-width: 1600px) and (min-height: 820px) {
+      body:not(.remote-mode) h1 { font-size: clamp(70px, 7.8vw, 128px); }
+      body:not(.remote-mode) h2 { font-size: clamp(58px, 6vw, 104px); }
+      body:not(.remote-mode) h3 { font-size: 32px; }
+      body:not(.remote-mode) .slide { padding: 64px 86px 54px; }
+      body:not(.remote-mode) .body-copy { font-size: 24px; line-height: 1.3; }
+      body:not(.remote-mode) .section-head h2 { margin-top: 20px; }
+      body:not(.remote-mode) .section-head .body-copy { margin-top: 24px; }
+      body:not(.remote-mode) .brand-lockup { top: 30px; left: 86px; font-size: 14px; }
+      body:not(.remote-mode) .slide-number { top: 31px; right: 86px; font-size: 12px; }
+      body:not(.remote-mode) .live-clock { top: 23px; right: 164px; font-size: 11px; }
+      body:not(.remote-mode) .clock-value { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
