@@ -713,6 +713,69 @@
     .notes-panel p { color: var(--muted); }
     .toast { border-color: var(--line); color: var(--forest); background: rgba(251, 250, 246, .98); }
 
+    /* Projection readability: keep the visual system, give the room enough type to read. */
+    @media (min-width: 901px) {
+      .slide { padding: 58px 72px 52px; }
+      h1 { font-size: clamp(64px, 7.8vw, 112px); }
+      h2 { font-size: clamp(54px, 6vw, 86px); }
+      h3 { font-size: 28px; }
+      .eyebrow { font-size: 11px; }
+      .brand-lockup { font-size: 13px; }
+      .slide-number { font-size: 11px; }
+      .live-clock { font-size: 10px; }
+      .clock-value { font-size: 12px; }
+      .body-copy { font-size: 21px; line-height: 1.34; }
+      .section-head h2 { margin-top: 18px; }
+      .section-head .body-copy { margin-top: 22px; }
+      .small-label { font-size: 10px; }
+      .two-up { gap: 18px; margin-top: 34px; }
+      .contrast-card, .tool-card, .route-card, .test-card, .guardrail-card { padding: 26px; }
+      .contrast-card .kicker, .tool-card .kicker, .route-card .kicker, .test-card .kicker, .guardrail-card .kicker { font-size: 11px; }
+      .contrast-card h3 { margin-top: 16px; font-size: 30px; }
+      .contrast-card ul { gap: 10px; margin-top: 20px; font-size: 17px; line-height: 1.35; }
+      .formula-callout { padding: 20px 24px; font-size: 15px; line-height: 1.4; }
+      .parts-copy p, .platform-copy p, .openclaw-bridge-copy p { font-size: 19px; }
+      .part-chip span { font-size: 13px; }
+      .scope-card p, .route-card p { font-size: 16px; }
+      .map-step .step-number { font-size: 11px; }
+      .map-step strong { font-size: 28px; }
+      .map-step span { font-size: 14px; }
+      .map-boundary { font-size: 16px; }
+      .route-card .route-fit { font-size: 11px; }
+      .bridge-card p { font-size: 13px; }
+      .harness-card .card-description { font-size: 15px; }
+      .harness-list li { font-size: 14px; }
+      .workspace-tree { font-size: 18px; }
+      .workspace-optional { font-size: 10px; }
+      .workspace-key-item p { font-size: 13px; }
+      .config-code { font-size: 15px; }
+      .config-point p { font-size: 14px; }
+      .config-foot { font-size: 12px; }
+      .config-folder-tree { font-size: 16px; }
+      .config-checklist { font-size: 15px; }
+      .assistant-brief p, .assistant-scope-row p { font-size: 14px; }
+      .tool-card p { font-size: 14px; }
+      .permission-line { font-size: 13px; }
+      .memory-card p { font-size: 17px; }
+      .memory-card .memory-example { font-size: 12px; }
+      .memory-rule { font-size: 14px; }
+      .node .node-type { font-size: 10px; }
+      .node strong { font-size: 22px; }
+      .node small { font-size: 11px; }
+      .build-check strong { font-size: 16px; }
+      .build-check span { font-size: 13px; }
+      .test-card p, .guardrail-card p { font-size: 15px; }
+      .risk-lane span { font-size: 14px; }
+      .approval-note { font-size: 13px; }
+      .loop-label { font-size: 11px; }
+      .deploy-item span { font-size: 15px; }
+      .close p { font-size: 22px; }
+      .close-check strong { font-size: 28px; }
+      .control-btn { min-width: 42px; height: 38px; font-size: 11px; }
+      .control-hint { font-size: 10px; }
+      .presenter-status { font-size: 10px; }
+    }
+
     @media (max-width: 900px) {
       body { overflow: auto; }
       .app { min-height: 100svh; padding: 10px; }
