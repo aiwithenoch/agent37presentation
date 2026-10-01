@@ -1866,6 +1866,7 @@
       const remoteGridToggle = document.querySelector("#remote-grid-toggle");
       const remoteGridPanel = document.querySelector("#remote-grid-panel");
       const clockFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "Africa/Accra", hour: "numeric", minute: "2-digit", hour12: true });
+      const DEFAULT_REALTIME_BACKEND_URL = "https://edffdb9736d9a48a900b.agent37.app";
 
       const query = new URLSearchParams(window.location.search);
       const pathParts = window.location.pathname.split("/").filter(Boolean);
@@ -1880,7 +1881,7 @@
       let touchStartX = null;
       let touchStartY = null;
       let touchStartTarget = null;
-      let realtimeDatabaseUrl = "";
+      let realtimeDatabaseUrl = DEFAULT_REALTIME_BACKEND_URL;
       let eventSource = null;
       let pollTimer = null;
       let realtimeStarted = false;
@@ -1895,6 +1896,7 @@
       function updateHash(index) { const hash = "#slide-" + (index + 1); if (window.location.hash !== hash) history.replaceState(null, "", hash); }
       function updateNotes() { notesText.textContent = slides[current].dataset.notes || "No presenter note for this slide."; }
       function apiUrl() { return "/api/session/" + encodeURIComponent(sessionId); }
+      function realtimeSessionUrl() { return realtimeDatabaseUrl.replace(/\/+$/, "") + "/sessions/" + encodeURIComponent(sessionId) + ".json"; }
       function setConnection(state, message) {
         if (remoteConnection) { remoteConnection.dataset.state = state; remoteConnection.textContent = message; }
         if (presenterStatusText) presenterStatusText.textContent = message;
@@ -1947,13 +1949,18 @@
       async function publishCurrentSlide() {
         if (!isRealtimeMode) return false;
         try {
-          const response = await fetch(apiUrl(), {
+          const request = {
             method: "PUT",
             cache: "no-store",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ slide: current })
-          });
-          const payload = await response.json().catch(() => ({}));
+          };
+          let response = await fetch(realtimeSessionUrl(), request);
+          let payload = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            response = await fetch(apiUrl(), request);
+            payload = await response.json().catch(() => ({}));
+          }
           if (!response.ok) throw new Error(payload.error || "Unable to publish slide");
           setConnection("connected", "Shared deck · broadcasting slide " + pad(current + 1));
           return true;
@@ -2008,10 +2015,15 @@
       async function fetchRemoteState() {
         if (!isRealtimeMode) return;
         try {
-          const response = await fetch(apiUrl(), { cache: "no-store" });
-          const payload = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(payload.error || "Realtime backend is not configured");
-          realtimeDatabaseUrl = payload.firebaseDatabaseUrl || realtimeDatabaseUrl;
+          let response = await fetch(realtimeSessionUrl(), { cache: "no-store" });
+          let backendState = await response.json().catch(() => null);
+          let payload = { state: backendState };
+          if (!response.ok) {
+            response = await fetch(apiUrl(), { cache: "no-store" });
+            payload = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(payload.error || "Realtime backend is not configured");
+            realtimeDatabaseUrl = payload.firebaseDatabaseUrl || realtimeDatabaseUrl;
+          }
           applyRemoteState(payload.state);
           if (!realtimeStarted) {
             realtimeStarted = true;
