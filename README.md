@@ -1,6 +1,6 @@
 # Set Up Your Own AI Agent
 
-An HTML 40-slide workshop presentation built in the same style as the n8n Accra deck.
+An HTML 41-slide workshop presentation built in the same style as the n8n Accra deck.
 
 The platform-choice slide uses researched brand marks and corrected product names. Asset provenance and usage notes are in [LOGO_SOURCES.md](LOGO_SOURCES.md).
 
