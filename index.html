@@ -1515,6 +1515,213 @@
           </div>
         </article>
 
+        <article class="slide dark close" data-title="Setup Complete · Add Skills" data-notes="This is the transition into the next chapter of the workshop. The agent is now configured: its instructions, identity, user profile, memory, workspace files, tools, and optional monitoring have been mapped. Do not present skills as another personality file. Skills are the next layer: reusable procedures that teach the agent how to use its connected tools for a particular kind of work. Tell the room: the tools are connected, so now we make the agent useful on purpose.">
+          <div class="slide-number"></div>
+          <div class="close-grid">
+            <div>
+              <span class="eyebrow reveal" style="--delay:.05s">CHAPTER TWO · SKILLS</span>
+              <h2 class="reveal" style="--delay:.13s">Setup is complete.<br><em>Now add skills.</em></h2>
+              <p class="reveal" style="--delay:.24s">Tools give F5 access. Skills give F5 a repeatable way to use that access.</p>
+              <div class="close-foot reveal" style="--delay:.34s">From connected tools to reusable capability</div>
+            </div>
+            <div class="close-checks reveal" style="--delay:.3s">
+              <div class="close-check"><b>01</b><strong>Agent is ready</strong></div>
+              <div class="close-check"><b>02</b><strong>Tools are connected</strong></div>
+              <div class="close-check"><b>03</b><strong>Skills come next</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper" data-title="What Are Agent Skills?" data-notes="OpenClaw defines skills as Markdown instruction files that teach the agent how and when to use tools. Each skill lives in a directory with a SKILL.md file and can include supporting references or scripts. Explain the difference simply: a tool performs an action; a skill gives the agent a repeatable method for combining actions. The definition is based on the official Skills documentation: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE NEXT LAYER</span>
+            <h2 class="reveal" style="--delay:.12s">What are<br><em>agent skills?</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A skill is a small, reusable instruction pack that teaches the agent how and when to use its tools for one kind of work.</p>
+          </div>
+          <div class="two-up reveal" style="--delay:.3s">
+            <section class="contrast-card agent">
+              <span class="kicker">A TOOL</span>
+              <h3>One action.</h3>
+              <ul><li>search for information</li><li>read a file</li><li>send a message</li><li>create a schedule</li></ul>
+            </section>
+            <section class="contrast-card">
+              <span class="kicker">A SKILL</span>
+              <h3>One repeatable method.</h3>
+              <ul><li>when to use the capability</li><li>what inputs it needs</li><li>which steps to follow</li><li>what safe output to return</li></ul>
+            </section>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Skill =</strong> trigger + inputs + steps + output + boundaries.</div>
+        </article>
+
+        <article class="slide paper" data-title="How Skills Improve F5" data-notes="Use this slide to explain why skills matter. A large core prompt should not contain every possible procedure. Instead, the agent keeps a general operating shape and loads the relevant skill when the task calls for it. Skills make work more consistent, easier to test, easier to improve, and safer because the approval boundary can be written into the procedure. OpenClaw filters eligible skills using location, configuration, and gating rules before they are available to the agent. Source: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">WHY SKILLS MATTER</span>
+            <h2 class="reveal" style="--delay:.12s">Skills turn good intentions<br><em>into repeatable work.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">The core agent stays flexible while each skill carries the specialist method for a real job.</p>
+          </div>
+          <div class="flow-map reveal" style="--delay:.3s">
+            <div class="map-step"><span class="step-number">01 · ASK</span><strong>Need</strong><span>Franky asks for a show or guest brief.</span></div>
+            <div class="map-step"><span class="step-number">02 · MATCH</span><strong>Load</strong><span>F5 selects the relevant skill.</span></div>
+            <div class="map-step"><span class="step-number">03 · WORK</span><strong>Follow</strong><span>The procedure keeps the work in order.</span></div>
+            <div class="map-step"><span class="step-number">04 · CHECK</span><strong>Review</strong><span>Facts, risks, and approvals stay visible.</span></div>
+            <div class="map-step"><span class="step-number">05 · RETURN</span><strong>Deliver</strong><span>The output makes the next move clear.</span></div>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Result:</strong> less improvisation, more consistency, and a playbook we can improve after every real use.</div>
+        </article>
+
+        <article class="slide paper config-slide" data-title="Inside a Skill" data-notes="Show the shape of one skill folder without implying that every skill needs all of these files. The required center is SKILL.md with YAML frontmatter containing at least a name and description, followed by instructions. References and scripts are supporting material when the skill needs them. For F5, start with one skill such as show-prep rather than installing a large catalog. Sources: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/creating-skills.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE SKILL FOLDER</span>
+            <h2 class="reveal" style="--delay:.12s"><span class="config-name">SKILL.md</span> <em class="config-title-accent">the recipe card.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">One folder can hold the instructions, references, and helper scripts for one repeatable capability.</p>
+          </div>
+          <div class="config-layout reveal" style="--delay:.3s">
+            <section class="config-file-panel green">
+              <div class="config-file-header"><div><span class="config-file-kicker">EXAMPLE · SHOW PREP</span><strong>skills/show-prep/</strong></div><span class="config-file-tag">LOAD WHEN NEEDED</span></div>
+              <pre class="config-folder-tree"><span class="tree-line">show-prep/</span><span class="tree-line">├── <span class="tree-file">SKILL.md</span>       <span class="tree-note">trigger · steps · output</span></span><span class="tree-line">├── <span class="tree-file">references/</span>   <span class="tree-note">approved source material</span></span><span class="tree-line">└── <span class="tree-file">scripts/</span>      <span class="tree-note">small helper code</span></span></pre>
+            </section>
+            <div class="config-points">
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Describe</strong><p>Name the skill and say exactly when it should be used.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Instruct</strong><p>Give the agent a clear order of operations and inputs.</p></div></div>
+              <div class="config-point"><span class="config-point-index">03</span><div><strong>Bound</strong><p>State what requires review before sending, publishing, or changing anything.</p></div></div>
+              <div class="config-foot green"><strong>Layman's version:</strong> a skill is the agent's recipe card for one job.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper" data-title="Inside Agent 37: Memory + Files" data-notes="Now connect the skill idea to the Agent 37 workspace. Agent 37 is the hosted runtime; the workspace files give F5 its instructions, memory, working material, and loadable skills. Keep the distinction clear: the runtime is where the agent runs, while the workspace is what gives it context. The OpenClaw workspace documentation describes files such as AGENTS.md, MEMORY.md, daily memory notes, and skills as separate parts of the workspace model. Source: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE AGENT WORKSPACE</span>
+            <h2 class="reveal" style="--delay:.12s">Inside Agent 37:<br><em>memory and files.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">The runtime keeps F5 available. The workspace gives F5 the context it needs to do useful work.</p>
+          </div>
+          <div class="workspace-layout reveal" style="--delay:.28s">
+            <section class="workspace-panel">
+              <div class="workspace-toolbar"><span class="workspace-glyph">⌘</span><strong>F5 workspace</strong><span class="workspace-state">AGENT 37 · LIVE</span></div>
+              <pre class="workspace-tree"><span class="tree-path">Agent 37 / workspace/</span>
+├── <span class="tree-file">AGENTS.md</span>      <span class="tree-note">how F5 should operate</span>
+├── <span class="tree-file">MEMORY.md</span>      <span class="tree-note">durable context</span>
+├── <span class="tree-file">memory/</span>        <span class="tree-note">dated working notes</span>
+├── <span class="tree-file">files/</span>         <span class="tree-note">briefs, docs, images</span>
+└── <span class="tree-file">skills/</span>        <span class="tree-note">loadable capabilities</span></pre>
+              <div class="workspace-optional"><span class="optional-dot">●</span><strong>Agent 37</strong><span>is the place that keeps the workspace running</span></div>
+            </section>
+            <div class="workspace-key">
+              <div class="workspace-key-item"><strong>Memory</strong><p>what should carry forward</p></div>
+              <div class="workspace-key-item"><strong>Files</strong><p>what F5 can work with</p></div>
+              <div class="workspace-key-item"><strong>Skills</strong><p>how F5 handles a job</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide paper" data-title="Memory and Files Do Different Jobs" data-notes="Teach the distinction here. MEMORY.md is a curated durable summary: stable preferences, important decisions, and facts worth carrying into future sessions. The memory/ folder holds dated notes and time-bound continuity. Files are working material: briefs, scripts, images, documents, and other artifacts that F5 may inspect or edit within its approved workspace. Memory is not a dumping ground, and files are not automatically trusted facts. Read before editing and verify what matters. Source: https://github.com/openclaw/openclaw/blob/main/docs/concepts/agent-workspace.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">CONTEXT LAYERS</span>
+            <h2 class="reveal" style="--delay:.12s">Memory and files<br><em>do different jobs.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">One carries continuity. The other carries the working material for today.</p>
+          </div>
+          <div class="two-up reveal" style="--delay:.3s">
+            <section class="contrast-card agent">
+              <span class="kicker">MEMORY</span>
+              <h3>Remember what matters.</h3>
+              <ul><li>stable preferences and identity</li><li>approved decisions and commitments</li><li>daily notes that can be retrieved</li><li>curated context for future sessions</li></ul>
+            </section>
+            <section class="contrast-card">
+              <span class="kicker">FILES</span>
+              <h3>Work with what exists.</h3>
+              <ul><li>briefs, scripts, images, and documents</li><li>source material for a current task</li><li>artifacts F5 can read or edit</li><li>inspect first; never assume the file is right</li></ul>
+            </section>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Memory is continuity.</strong> Files are working material. Skills explain how to use both safely.</div>
+        </article>
+
+        <article class="slide paper" data-title="Schedules: How It Works" data-notes="Introduce schedules as a separate layer from skills and memory. A schedule decides when the agent should wake up; it does not replace the agent's instructions or create a new skill. OpenClaw automations persist jobs, wake the agent at the right time, and can deliver output to a channel, webhook, or nowhere. Schedule types include one-shot at, fixed every intervals, and cron expressions; timestamps without a timezone are UTC unless a timezone is supplied. Sources: https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md ; https://docs.openclaw.ai/automation/cron-jobs/schedules .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE TIME LAYER</span>
+            <h2 class="reveal" style="--delay:.12s">Schedules:<br><em>how it works.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A schedule tells the agent when to wake up. The skill tells it what to do once it wakes.</p>
+          </div>
+          <div class="flow-map reveal" style="--delay:.3s">
+            <div class="map-step"><span class="step-number">01 · DEFINE</span><strong>When?</strong><span>Choose a time, interval, or event.</span></div>
+            <div class="map-step"><span class="step-number">02 · WAKE</span><strong>Start</strong><span>The scheduler triggers the run.</span></div>
+            <div class="map-step"><span class="step-number">03 · LOAD</span><strong>Context</strong><span>Bring in the right files and skill.</span></div>
+            <div class="map-step"><span class="step-number">04 · ACT</span><strong>Work</strong><span>Use tools within the boundaries.</span></div>
+            <div class="map-step"><span class="step-number">05 · DELIVER</span><strong>Return</strong><span>Send the result, or stay quiet.</span></div>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Schedule =</strong> when to wake + what to run + where the result goes.</div>
+        </article>
+
+        <article class="slide paper" data-title="Heartbeat or Automation?" data-notes="Use this comparison to prevent a common design mistake. OpenClaw describes heartbeat as a system-owned monitor automation that runs periodic main-session turns so the agent can surface meaningful changes without spamming the operator. User-authored automations are better for explicit work with its own instructions or schedule: one-shot reminders, recurring intervals, or cron expressions. Both use the same scheduler. Sources: https://github.com/openclaw/openclaw/blob/main/docs/automation/index.md ; https://github.com/openclaw/openclaw/blob/main/docs/gateway/heartbeat.md .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">CHOOSE THE RIGHT TRIGGER</span>
+            <h2 class="reveal" style="--delay:.12s">Heartbeat or<br><em>automation?</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">They share a scheduler, but they solve different timing problems.</p>
+          </div>
+          <div class="two-up reveal" style="--delay:.3s">
+            <section class="contrast-card agent">
+              <span class="kicker">HEARTBEAT</span>
+              <h3>Ambient attention.</h3>
+              <ul><li>system-owned monitor</li><li>periodic main-session turn</li><li>surfaces meaningful changes</li><li>quiet when nothing needs attention</li></ul>
+            </section>
+            <section class="contrast-card">
+              <span class="kicker">AUTOMATION</span>
+              <h3>Explicit work.</h3>
+              <ul><li>your instructions and schedule</li><li>one-shot, interval, or cron</li><li>its own delivery target</li><li>best for reminders and reports</li></ul>
+            </section>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Rule of thumb:</strong> exact job → automation. Ambient awareness → heartbeat.</div>
+        </article>
+
+        <article class="slide paper" data-title="Inside One Scheduled Run" data-notes="Walk through one concrete example: an 08:00 Africa/Accra show-prep run. The scheduler wakes the agent, the agent loads only the relevant context and show-prep skill, tools gather or verify source material, the output is checked, and the result is delivered or suppressed if there is nothing useful to say. A scheduled run still follows the same approval boundaries as an interactive run. Do not promise that a schedule can publish or message without the appropriate permission and approval. Schedule references: https://docs.openclaw.ai/automation/cron-jobs/schedules .">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">ONE EXAMPLE</span>
+            <h2 class="reveal" style="--delay:.12s">Inside one<br><em>scheduled run.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A scheduled run is still an agent run — it simply starts because the clock says it is time.</p>
+          </div>
+          <div class="build-layout">
+            <div class="canvas reveal" style="--delay:.28s">
+              <span class="canvas-label">EXAMPLE · DAILY SHOW PREP · 08:00 ACCRA</span>
+              <div class="canvas-flow">
+                <div class="node trigger"><span class="node-type">TRIGGER</span><strong>Wake</strong><small>the schedule fires</small></div>
+                <div class="node agent"><span class="node-type">AGENT</span><strong>Load context</strong><small>files + show-prep skill</small></div>
+                <div class="node tool"><span class="node-type">TOOLS</span><strong>Research</strong><small>gather and verify</small></div>
+                <div class="node review"><span class="node-type">OUTPUT</span><strong>Brief</strong><small>deliver or stay quiet</small></div>
+              </div>
+            </div>
+            <div class="build-checklist reveal" style="--delay:.38s">
+              <div class="build-check"><b>01</b><div><strong>Wake</strong><p>The scheduler starts the run at the configured time.</p></div></div>
+              <div class="build-check"><b>02</b><div><strong>Prepare</strong><p>F5 loads only the context needed for this job.</p></div></div>
+              <div class="build-check"><b>03</b><div><strong>Verify</strong><p>Sources, facts, and approval boundaries stay visible.</p></div></div>
+              <div class="build-check"><b>04</b><div><strong>Deliver</strong><p>Send a useful result — or return nothing when nothing changed.</p></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide dark close" data-title="Skills + Memory + Schedules" data-notes="Close this chapter by showing the relationship between the layers. Skills give the agent a method. Memory gives it continuity. Files give it working material. Schedules decide when it should wake. Tools let it act. The agent coordinates the pieces and keeps the human approval boundary visible. The next practical step is to choose one real job and build one small skill around it — for example, show preparation, briefing, or follow-up. This closes the teaching sequence and opens the workshop build.">
+          <div class="slide-number"></div>
+          <div class="close-grid">
+            <div>
+              <span class="eyebrow reveal" style="--delay:.05s">THE PATTERN</span>
+              <h2 class="reveal" style="--delay:.13s">Make the agent<br><em>useful over time.</em></h2>
+              <p class="reveal" style="--delay:.24s">The parts work together: skills know how, memory remembers what matters, and schedules know when to wake.</p>
+              <div class="close-foot reveal" style="--delay:.34s">Next: build one skill for one real job</div>
+            </div>
+            <div class="close-checks reveal" style="--delay:.3s">
+              <div class="close-check"><b>01</b><strong>Skills · know how</strong></div>
+              <div class="close-check"><b>02</b><strong>Memory · carry context</strong></div>
+              <div class="close-check"><b>03</b><strong>Schedules · wake on time</strong></div>
+            </div>
+          </div>
+        </article>
+
 
        <div class="brand-lockup"><span class="brand-mark"><i></i><i></i><i></i></span><span>AI WITH ENOCH</span><span class="x">×</span><span>AI AGENT LAB</span></div>
         <div class="live-clock" title="Current local time in Africa/Accra" aria-label="Current local time in Africa/Accra"><span class="clock-label">LOCAL TIME</span><strong class="clock-value">--:--</strong><span class="clock-zone">ACCRA</span></div>
