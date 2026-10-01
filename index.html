@@ -1682,62 +1682,62 @@
           </div>
         </article>
 
-        <article class="slide paper" data-title="What Are Agent Skills?" data-notes="OpenClaw defines skills as Markdown instruction files that teach the agent how and when to use tools. Each skill lives in a directory with a SKILL.md file and can include supporting references or scripts. Explain the difference simply: a tool performs an action; a skill gives the agent a repeatable method for combining actions. The definition is based on the official Skills documentation: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+        <article class="slide paper" data-title="What Are Agent Skills?" data-notes="Use the supplied Agent Skills transcript as the teaching frame: language models already know many facts and can reason, but agents still need procedural knowledge — the repeatable way a job gets done. A skill adds that procedure. Explain that a skill is a Markdown instruction file, usually SKILL.md, whose name and description tell the agent what it is and when it applies. Source video: https://www.youtube.com/watch?v=Lg-meK5IU8Q ; official docs: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE NEXT LAYER</span>
             <h2 class="reveal" style="--delay:.12s">What are<br><em>agent skills?</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">A skill is a small, reusable instruction pack that teaches the agent how and when to use its tools for one kind of work.</p>
+            <p class="body-copy reveal" style="--delay:.2s">Agents can reason and recall facts. Skills add the procedural knowledge: the repeatable way a real job gets done.</p>
           </div>
           <div class="two-up reveal" style="--delay:.3s">
             <section class="contrast-card agent">
-              <span class="kicker">A TOOL</span>
-              <h3>One action.</h3>
-              <ul><li>search for information</li><li>read a file</li><li>send a message</li><li>create a schedule</li></ul>
+              <span class="kicker">WITHOUT A SKILL</span>
+              <h3>Prompt every step.</h3>
+              <ul><li>repeat the workflow each time</li><li>leave the agent to guess</li><li>lose the sequence and checks</li><li>make consistency expensive</li></ul>
             </section>
             <section class="contrast-card">
-              <span class="kicker">A SKILL</span>
-              <h3>One repeatable method.</h3>
-              <ul><li>when to use the capability</li><li>what inputs it needs</li><li>which steps to follow</li><li>what safe output to return</li></ul>
+              <span class="kicker">WITH A SKILL</span>
+              <h3>Load the procedure.</h3>
+              <ul><li>name the capability</li><li>describe when it applies</li><li>follow the steps in order</li><li>return a bounded output</li></ul>
             </section>
           </div>
-          <div class="formula-callout reveal" style="--delay:.42s"><strong>Skill =</strong> trigger + inputs + steps + output + boundaries.</div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Skill =</strong> procedural knowledge the agent can load when the task matches.</div>
         </article>
 
-        <article class="slide paper" data-title="How Skills Improve F5" data-notes="Use this slide to explain why skills matter. A large core prompt should not contain every possible procedure. Instead, the agent keeps a general operating shape and loads the relevant skill when the task calls for it. Skills make work more consistent, easier to test, easier to improve, and safer because the approval boundary can be written into the procedure. OpenClaw filters eligible skills using location, configuration, and gating rules before they are available to the agent. Source: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
+        <article class="slide paper" data-title="How Skills Improve F5" data-notes="Use the transcript's progressive-disclosure explanation: tier one keeps only each skill's name and description in the index; tier two loads the full SKILL.md body when the request matches; tier three loads scripts, references, or assets only when needed. This protects the context window while keeping procedures available on demand. The transcript also distinguishes skills as procedural knowledge from MCP tool access, RAG factual retrieval, and fine-tuning. Source video: https://www.youtube.com/watch?v=Lg-meK5IU8Q ; skills docs: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md .">
           <div class="slide-number"></div>
           <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">WHY SKILLS MATTER</span>
-            <h2 class="reveal" style="--delay:.12s">Skills turn good intentions<br><em>into repeatable work.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">The core agent stays flexible while each skill carries the specialist method for a real job.</p>
+            <span class="eyebrow reveal" style="--delay:.05s">PROGRESSIVE DISCLOSURE</span>
+            <h2 class="reveal" style="--delay:.12s">Load the right knowledge<br><em>at the right time.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">The agent starts with a lightweight index, then pulls in the procedure and resources only when the task needs them.</p>
           </div>
           <div class="flow-map reveal" style="--delay:.3s">
-            <div class="map-step"><span class="step-number">01 · ASK</span><strong>Need</strong><span>Franky asks for a show or guest brief.</span></div>
-            <div class="map-step"><span class="step-number">02 · MATCH</span><strong>Load</strong><span>F5 selects the relevant skill.</span></div>
-            <div class="map-step"><span class="step-number">03 · WORK</span><strong>Follow</strong><span>The procedure keeps the work in order.</span></div>
-            <div class="map-step"><span class="step-number">04 · CHECK</span><strong>Review</strong><span>Facts, risks, and approvals stay visible.</span></div>
-            <div class="map-step"><span class="step-number">05 · RETURN</span><strong>Deliver</strong><span>The output makes the next move clear.</span></div>
+            <div class="map-step"><span class="step-number">01 · INDEX</span><strong>Metadata</strong><span>Name + description for every skill.</span></div>
+            <div class="map-step"><span class="step-number">02 · MATCH</span><strong>Trigger</strong><span>The request matches the description.</span></div>
+            <div class="map-step"><span class="step-number">03 · LOAD</span><strong>Instructions</strong><span>Read the full SKILL.md body.</span></div>
+            <div class="map-step"><span class="step-number">04 · RESOURCE</span><strong>Support</strong><span>Fetch scripts, references, or assets.</span></div>
+            <div class="map-step"><span class="step-number">05 · RUN SAFE</span><strong>Deliver</strong><span>Execute, review, and return the result.</span></div>
           </div>
-          <div class="formula-callout reveal" style="--delay:.42s"><strong>Result:</strong> less improvisation, more consistency, and a playbook we can improve after every real use.</div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Progressive disclosure:</strong> index → instructions → resources.</div>
         </article>
 
-        <article class="slide paper config-slide" data-title="Inside a Skill" data-notes="Show the shape of one skill folder without implying that every skill needs all of these files. The required center is SKILL.md with YAML frontmatter containing at least a name and description, followed by instructions. References and scripts are supporting material when the skill needs them. For F5, start with one skill such as show-prep rather than installing a large catalog. Sources: https://github.com/openclaw/openclaw/blob/main/docs/tools/skills.md ; https://github.com/openclaw/openclaw/blob/main/docs/tools/creating-skills.md .">
+        <article class="slide paper config-slide" data-title="Inside a Skill" data-notes="Use the transcript's concrete structure: SKILL.md contains YAML front matter with two mandatory fields — name and description. The description is the trigger condition. Below it, the body contains the step-by-step workflow, rules, and examples. Optional scripts and references support the procedure when needed. Source video: https://www.youtube.com/watch?v=Lg-meK5IU8Q ; official docs: https://github.com/openclaw/openclaw/blob/main/docs/tools/creating-skills.md .">
           <div class="slide-number"></div>
           <div class="section-head">
             <span class="eyebrow reveal" style="--delay:.05s">THE SKILL FOLDER</span>
             <h2 class="reveal" style="--delay:.12s"><span class="config-name">SKILL.md</span> <em class="config-title-accent">the recipe card.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">One folder can hold the instructions, references, and helper scripts for one repeatable capability.</p>
+            <p class="body-copy reveal" style="--delay:.2s">At minimum: name the skill, describe when it applies, then write the procedure in plain Markdown.</p>
           </div>
           <div class="config-layout reveal" style="--delay:.3s">
             <section class="config-file-panel green">
               <div class="config-file-header"><div><span class="config-file-kicker">EXAMPLE · SHOW PREP</span><strong>skills/show-prep/</strong></div><span class="config-file-tag">LOAD WHEN NEEDED</span></div>
-              <pre class="config-folder-tree"><span class="tree-line">show-prep/</span><span class="tree-line">├── <span class="tree-file">SKILL.md</span>       <span class="tree-note">trigger · steps · output</span></span><span class="tree-line">├── <span class="tree-file">references/</span>   <span class="tree-note">approved source material</span></span><span class="tree-line">└── <span class="tree-file">scripts/</span>      <span class="tree-note">small helper code</span></span></pre>
+              <pre class="config-folder-tree"><span class="tree-line">show-prep/</span><span class="tree-line">├── <span class="tree-file">SKILL.md</span>       <span class="tree-note">name · trigger · steps</span></span><span class="tree-line">├── <span class="tree-file">references/</span>   <span class="tree-note">approved source material</span></span><span class="tree-line">├── <span class="tree-file">scripts/</span>      <span class="tree-note">optional executable helpers</span></span><span class="tree-line">└── <span class="tree-file">assets/</span>       <span class="tree-note">optional templates and data</span></span></pre>
             </section>
             <div class="config-points">
-              <div class="config-point"><span class="config-point-index">01</span><div><strong>Describe</strong><p>Name the skill and say exactly when it should be used.</p></div></div>
-              <div class="config-point"><span class="config-point-index">02</span><div><strong>Instruct</strong><p>Give the agent a clear order of operations and inputs.</p></div></div>
+              <div class="config-point"><span class="config-point-index">01</span><div><strong>Trigger</strong><p>The name and description tell the agent when this skill applies.</p></div></div>
+              <div class="config-point"><span class="config-point-index">02</span><div><strong>Instruct</strong><p>Write the step-by-step workflow, rules, and examples.</p></div></div>
               <div class="config-point"><span class="config-point-index">03</span><div><strong>Bound</strong><p>State what requires review before sending, publishing, or changing anything.</p></div></div>
-              <div class="config-foot green"><strong>Layman's version:</strong> a skill is the agent's recipe card for one job.</div>
+              <div class="config-foot green"><strong>Layman's version:</strong> a skill is procedural memory — a recipe card loaded when the job matches.</div>
             </div>
           </div>
         </article>
