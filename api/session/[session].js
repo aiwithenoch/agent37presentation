@@ -1,5 +1,5 @@
 let cachedAccessToken = null;
-const DEFAULT_REALTIME_BACKEND_URL = "";
+const DEFAULT_REALTIME_BACKEND_URL = "https://edffdb9736d9a48a900b.agent37.app";
 
 function json(res, status, body) {
   res.status(status).json(body);
