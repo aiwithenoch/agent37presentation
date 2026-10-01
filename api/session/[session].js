@@ -1,4 +1,5 @@
 let cachedAccessToken = null;
+const DEFAULT_REALTIME_BACKEND_URL = "";
 
 function json(res, status, body) {
   res.status(status).json(body);
@@ -11,6 +12,25 @@ function base64Url(value) {
 function getSession(value) {
   const session = String(value || "");
   return /^[a-zA-Z0-9_-]{1,64}$/.test(session) ? session : null;
+}
+
+function realtimeBackendUrl() {
+  return String(process.env.REALTIME_BACKEND_URL || DEFAULT_REALTIME_BACKEND_URL || "").replace(/\/+$/, "");
+}
+
+async function realtimeBackendRequest(method, session, body) {
+  const baseUrl = realtimeBackendUrl();
+  if (!baseUrl) return null;
+  const url = new URL(baseUrl + "/sessions/" + encodeURIComponent(session) + ".json");
+  const response = await fetch(url, {
+    method,
+    headers: body === undefined ? { Accept: "application/json" } : { Accept: "application/json", "Content-Type": "application/json" },
+    body: body === undefined ? undefined : JSON.stringify(body),
+    cache: "no-store"
+  });
+  const payload = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(payload?.error || "Realtime backend request failed");
+  return payload;
 }
 
 function serviceAccount() {
@@ -80,6 +100,11 @@ module.exports = async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
+      const backendUrl = realtimeBackendUrl();
+      if (backendUrl) {
+        const backendState = await realtimeBackendRequest("GET", session);
+        return json(res, 200, { session, state: backendState, firebaseDatabaseUrl: backendUrl });
+      }
       const state = await firebaseRequest("GET", session);
       return json(res, 200, {
         session,
@@ -95,6 +120,8 @@ module.exports = async function handler(req, res) {
     const slide = Number(req.body?.slide);
     if (!Number.isInteger(slide) || slide < 0 || slide > 999) return json(res, 400, { error: "Slide must be a non-negative integer" });
     try {
+      const backendResult = await realtimeBackendRequest("PUT", session, { slide });
+      if (backendResult !== null) return json(res, 200, { ...backendResult, firebaseDatabaseUrl: realtimeBackendUrl() });
       const state = { slide, updatedAt: new Date().toISOString() };
       await firebaseRequest("PUT", session, state);
       return json(res, 200, { ok: true, session, state, firebaseDatabaseUrl: String(process.env.FIREBASE_DATABASE_URL || "").replace(/\/+$/, "") || null });
