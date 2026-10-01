@@ -1039,6 +1039,27 @@
           <div class="formula-callout reveal" style="--delay:.42s"><strong>Cloud</strong> gives you access from anywhere. <strong>Local</strong> gives you more control over the machine.</div>
         </article>
 
+        <article class="slide paper schedule-slide" data-title="Schedules" data-notes="Show the supplied Agent 37 Schedules interface before moving into skills. Point to the New schedule action, the empty state, the Daily briefing and Inbox triage starting points, and Start from scratch. Keep the explanation tied to the interface: a schedule pairs a standing instruction with a time. This is the actual Agent 37 screen, not a generic mockup.">
+          <div class="slide-number"></div>
+          <div class="schedule-kicker">
+            <span class="eyebrow reveal" style="--delay:.05s">INSIDE AGENT 37</span>
+          </div>
+          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 Schedules interface">
+            <img src="/assets/agent37-schedules.png" alt="Agent 37 Schedules page showing no schedules yet, starting points, and the New schedule action">
+          </div>
+        </article>
+
+        <article class="slide paper schedule-slide schedule-create-slide" data-title="How to Create a Schedule" data-notes="After showing the schedules overview, demonstrate the creation screen. Name the schedule, write the standing message the agent should receive, choose the cadence and time, confirm the Africa/Accra timezone, then create the schedule. The schedule is the instruction plus the moment it should run.">
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">NEXT STEP · AGENT 37</span>
+            <h2 class="reveal" style="--delay:.12s">How to create<br><em>a schedule.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">Name the schedule, write the standing instruction, choose when it runs, and confirm the timezone.</p>
+          </div>
+          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 create schedule form">
+            <img src="/assets/agent37-schedule-create.png" alt="Agent 37 create schedule form with message, weekdays, time, timezone, and Create schedule controls">
+          </div>
+        </article>
+
         <article class="slide paper" data-title="Platform and Architecture Choices" data-notes="If someone does not want to code or manage the complete setup themselves, introduce the platform and agentic architecture choices. The researched names are Grok Bot, Meta Muse, Claude Code, Codex, Hermes, OpenClaw, NVIDIA NemoClaw, MiniMax MaxClaw, KimiClaw, Manus, and Relevance AI. Use the logos as identifiers, not endorsements. Sources checked 2026-09-17: https://docs.x.ai/grok-bot/overview ; https://ai.meta.com/muse/ ; https://www.anthropic.com/news ; https://openai.com/codex/ ; https://github.com/hermes-agent-org/hermes ; https://www.openclaw.org/ ; https://www.nvidia.com/en-us/ai/nemoclaw/ ; https://agent.minimax.io/activity/max-claw ; https://www.kimi.com/en/help/kimi-claw/kimiclaw-group-chat ; https://events.manus.im/fr/brand ; https://relevanceai.com/ . After this comparison, move directly to the workshop demo route: OpenClaw on Agent 37. The point is to choose a route you can inspect, test, and operate.">
           <div class="slide-number"></div>
           <div class="section-head">
@@ -1123,6 +1144,34 @@
             </section>
           </div>
           <div class="harness-footer formula-callout reveal" style="--delay:.42s"><strong>Simple picture:</strong> OpenClaw is the harness. Agent 37 is the place that keeps it running.</div>
+        </article>
+
+        <article class="slide paper schedule-slide schedule-create-slide" data-title="Skill Creator" data-notes="Use the supplied Skill Creator screen as the concrete example of a skill-building tool. It can create new skills, improve existing skills, and measure skill performance. Connect it to the lesson: a skill is not just a prompt; it is a reusable procedure that can be tested and improved. Screenshot supplied by Enoch from the skill-creator entry created by Anthropic.">
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">THE NEXT CAPABILITY</span>
+            <h2 class="reveal" style="--delay:.12s">Create, improve,<br><em>measure a skill.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">A skill becomes useful when its procedure can be created, refined, and tested against real work.</p>
+          </div>
+          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Skill Creator capability screen">
+            <img src="/assets/skill-creator.png" alt="Skill Creator by Anthropic, with tools to create, improve, and measure agent skills">
+          </div>
+        </article>
+
+        <article class="slide paper" data-title="Five Essential Assistant Skills" data-notes="These five community skills are the shortlist for a personal-assistant agent. Todo by Agenticio handles tasks, reminders, commitments, and next actions with local-only storage: https://clawhub.ai/agenticio/skills/todo . Calendar Scheduling by Billy Lui checks availability, time zones, double-booking, and confirmation before booking: https://clawhub.ai/billylui/skills/calendar-scheduling . Inbox Zero Warrior triages email exports into urgency, action, and draft replies without sending mail itself: https://clawhub.ai/voronindenis5/skills/inbox-zero-warrior . Daily Briefing by sai-sh combines weather, calendar, email, and tasks, but needs connected credentials: https://clawhub.ai/sai-sh/skills/user-briefing . Personal CRM by Matthew Poe keeps relationship cadence, birthdays, touchpoints, and follow-up notes local: https://clawhub.ai/matthewpoe/skills/personal-crm . Review each SKILL.md, scripts, permissions, and secrets before installing any community skill.">
+          <div class="slide-number"></div>
+          <div class="section-head">
+            <span class="eyebrow reveal" style="--delay:.05s">A PERSONAL-ASSISTANT STARTER SET</span>
+            <h2 class="reveal" style="--delay:.12s">Five skills that make<br><em>an assistant useful.</em></h2>
+            <p class="body-copy reveal" style="--delay:.2s">Choose the repeatable jobs first. Add the community skill only after its instructions and permissions make sense.</p>
+          </div>
+          <div class="flow-map reveal" style="--delay:.3s">
+            <div class="map-step"><span class="step-number">01 · ACT</span><strong>Todo</strong><span>Tasks, reminders, commitments, and next actions.<br><code>@agenticio/todo</code></span></div>
+            <div class="map-step"><span class="step-number">02 · TIME</span><strong>Calendar</strong><span>Availability, time zones, and confirmation before booking.<br><code>@billylui/calendar-scheduling</code></span></div>
+            <div class="map-step"><span class="step-number">03 · INBOX</span><strong>Email triage</strong><span>Urgency, action, and draft replies — no auto-send.<br><code>@voronindenis5/inbox-zero-warrior</code></span></div>
+            <div class="map-step"><span class="step-number">04 · CONTEXT</span><strong>Briefing</strong><span>Weather, calendar, email, and tasks in one start-of-day view.<br><code>@sai-sh/user-briefing</code></span></div>
+            <div class="map-step"><span class="step-number">05 · PEOPLE</span><strong>Personal CRM</strong><span>Birthdays, touchpoints, cadence, and follow-up memory.<br><code>@matthewpoe/personal-crm</code></span></div>
+          </div>
+          <div class="formula-callout reveal" style="--delay:.42s"><strong>Safety rule:</strong> inspect the skill, its scripts, its permissions, and its secrets before you install it.</div>
         </article>
 
         <article class="slide paper" data-title="What We Are Building" data-notes="This slide defines the product we are building next: an executive assistant for Franky 5. Treat the three capabilities on the right as the first scope to validate, not a finished specification. Explain that the assistant should understand Franky's priorities, keep useful context, turn requests into follow-ups, and prepare briefings that make the next action clear. The live build will turn this product shape into the OpenClaw agent running on Agent 37.">
@@ -1668,27 +1717,6 @@
               <div class="close-check"><b>02</b><strong>Tools are connected</strong></div>
               <div class="close-check"><b>03</b><strong>Skills come next</strong></div>
             </div>
-          </div>
-        </article>
-
-        <article class="slide paper schedule-slide" data-title="Schedules" data-notes="Show the supplied Agent 37 Schedules interface before moving into skills. Point to the New schedule action, the empty state, the Daily briefing and Inbox triage starting points, and Start from scratch. Keep the explanation tied to the interface: a schedule pairs a standing instruction with a time. This is the actual Agent 37 screen, not a generic mockup.">
-          <div class="slide-number"></div>
-          <div class="schedule-kicker">
-            <span class="eyebrow reveal" style="--delay:.05s">INSIDE AGENT 37</span>
-          </div>
-          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 Schedules interface">
-            <img src="/assets/agent37-schedules.png" alt="Agent 37 Schedules page showing no schedules yet, starting points, and the New schedule action">
-          </div>
-        </article>
-
-        <article class="slide paper schedule-slide schedule-create-slide" data-title="How to Create a Schedule" data-notes="After showing the schedules overview, demonstrate the creation screen. Name the schedule, write the standing message the agent should receive, choose the cadence and time, confirm the Africa/Accra timezone, then create the schedule. The schedule is the instruction plus the moment it should run.">
-          <div class="section-head">
-            <span class="eyebrow reveal" style="--delay:.05s">NEXT STEP · AGENT 37</span>
-            <h2 class="reveal" style="--delay:.12s">How to create<br><em>a schedule.</em></h2>
-            <p class="body-copy reveal" style="--delay:.2s">Name the schedule, write the standing instruction, choose when it runs, and confirm the timezone.</p>
-          </div>
-          <div class="schedule-visual reveal" style="--delay:.24s" aria-label="Agent 37 create schedule form">
-            <img src="/assets/agent37-schedule-create.png" alt="Agent 37 create schedule form with message, weekdays, time, timezone, and Create schedule controls">
           </div>
         </article>
 
