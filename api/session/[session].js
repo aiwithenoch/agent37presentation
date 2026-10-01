@@ -1,5 +1,3 @@
-const crypto = require("crypto");
-
 let cachedAccessToken = null;
 
 function json(res, status, body) {
@@ -13,15 +11,6 @@ function base64Url(value) {
 function getSession(value) {
   const session = String(value || "");
   return /^[a-zA-Z0-9_-]{1,64}$/.test(session) ? session : null;
-}
-
-function presenterKeyMatches(provided) {
-  const expected = String(process.env.PRESENTER_ACCESS_SECRET || "");
-  const candidate = String(provided || "");
-  if (!expected || !candidate) return false;
-  const expectedBuffer = Buffer.from(expected);
-  const candidateBuffer = Buffer.from(candidate);
-  return expectedBuffer.length === candidateBuffer.length && crypto.timingSafeEqual(expectedBuffer, candidateBuffer);
 }
 
 function serviceAccount() {
@@ -82,7 +71,7 @@ async function firebaseRequest(method, session, body) {
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store, max-age=0");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Presenter-Key");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
   if (req.method === "OPTIONS") return res.status(204).end();
 
@@ -103,8 +92,6 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === "PUT") {
-    const presenterKey = req.headers["x-presenter-key"] || String(req.headers.authorization || "").replace(/^Bearer\s+/i, "");
-    if (!presenterKeyMatches(presenterKey)) return json(res, 401, { error: "Invalid presenter key" });
     const slide = Number(req.body?.slide);
     if (!Number.isInteger(slide) || slide < 0 || slide > 999) return json(res, 400, { error: "Slide must be a non-negative integer" });
     try {

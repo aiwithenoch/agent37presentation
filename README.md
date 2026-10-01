@@ -1,6 +1,6 @@
 # Set Up Your Own AI Agent
 
-An HTML 30-slide workshop presentation built in the same style as the n8n Accra deck.
+An HTML 40-slide workshop presentation built in the same style as the n8n Accra deck.
 
 The platform-choice slide uses researched brand marks and corrected product names. Asset provenance and usage notes are in [LOGO_SOURCES.md](LOGO_SOURCES.md).
 
@@ -24,7 +24,7 @@ The same deck can be opened in three modes for a named session:
 - Presenter deck: `https://agent37presentation.vercel.app/present/max-tv`
 - Mobile remote: `https://agent37presentation.vercel.app/remote/max-tv`
 
-The viewer is read-only and follows the presenter's current slide through Firebase Realtime Database. The presenter deck keeps the existing keyboard, fullscreen, notes, grid, animation, touch, and Accra-clock behavior. The remote is a compact mobile controller with Previous, Next, Grid, and a current-slide indicator.
+The viewer is read-only and follows the presenter's current slide through Firebase Realtime Database. The presenter deck keeps the existing keyboard, fullscreen, notes, grid, animation, touch, and Accra-clock behavior. The remote is a compact mobile controller with Previous, Next, Grid, and a current-slide indicator. There is no presenter-key prompt: keep the controller URL private because anyone who has it can change the live slide.
 
 ### Required Vercel configuration
 
@@ -33,12 +33,11 @@ Create a Firebase Realtime Database and publish the rules in [`database.rules.js
 ```text
 FIREBASE_DATABASE_URL=https://YOUR_DATABASE.firebasedatabase.app
 FIREBASE_SERVICE_ACCOUNT_JSON={the complete Firebase service-account JSON}
-PRESENTER_ACCESS_SECRET={a long random value, for example: openssl rand -hex 32}
 ```
 
-`FIREBASE_SERVICE_ACCOUNT_JSON` is server-only and must never be committed to GitHub or placed in a viewer/controller URL. Firebase's database URL is returned to the browser so viewers can subscribe to the public read-only stream; the service-account key and presenter key stay inside the Vercel function environment. The database rules intentionally allow public reads but no client writes. Only the Vercel API route can publish a slide after validating `X-Presenter-Key`.
+`FIREBASE_SERVICE_ACCOUNT_JSON` is server-only and must never be committed to GitHub or placed in a viewer/controller URL. Firebase's database URL is returned to the browser so viewers can subscribe to the public read-only stream. The database rules intentionally allow public reads but no client writes; the Vercel API route publishes controller changes.
 
-After adding the variables, redeploy the existing Vercel project. Open the presenter or remote URL, enter `PRESENTER_ACCESS_SECRET` once, and share only the `/watch/max-tv` URL with viewers.
+After adding the variables, redeploy the existing Vercel project. Open the presenter or remote URL to control the deck, and share only the `/watch/max-tv` URL with viewers.
 
 For local Firebase rules deployment, the Firebase CLI can use the included `firebase.json` file:
 

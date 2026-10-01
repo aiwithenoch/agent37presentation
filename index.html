@@ -598,7 +598,6 @@
     .presenter-status .mode-badge { padding: 4px 7px; border-radius: 999px; color: var(--forest); background: var(--sage); font-size: 8px; letter-spacing: .08em; }
     .presenter-status .mode-badge.viewer { color: #356b9d; background: #e8f1fb; }
     .presenter-status-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .presenter-connect { margin-left: auto; min-width: auto; height: 28px; padding-inline: 9px; }
     .remote-shell { width: min(100%, 620px); min-height: 100vh; margin: 0 auto; padding: 24px 18px 32px; color: var(--ink); }
     .remote-shell[hidden] { display: none; }
     .remote-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
@@ -623,19 +622,11 @@
     .remote-grid-card:hover, .remote-grid-card:focus-visible, .remote-grid-card.is-current { border-color: var(--coral); background: #fff0ed; outline: none; }
     .remote-grid-card span { color: var(--coral-dark); font-family: "JetBrains Mono", monospace; font-size: 9px; }
     .remote-grid-card strong { font-size: 12px; line-height: 1.1; }
-    .remote-auth { margin-top: 14px; padding: 16px; border: 1px solid rgba(255, 109, 90, .35); border-radius: 16px; background: #fff0ed; }
-    .remote-auth[hidden] { display: none; }
-    .remote-auth p { margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 1.35; }
-    .remote-auth form { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 12px; }
-    .remote-auth input { min-width: 0; height: 42px; padding: 0 11px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: var(--paper); font-family: "JetBrains Mono", monospace; font-size: 11px; }
-    .remote-auth button { min-height: 42px; padding: 0 13px; border-radius: 9px; color: var(--paper); background: var(--coral-dark); font-family: "JetBrains Mono", monospace; font-size: 10px; }
-    .remote-auth .auth-error { min-height: 15px; margin-top: 8px; color: var(--coral-dark); font-family: "JetBrains Mono", monospace; font-size: 9px; }
     .remote-footnote { margin-top: 20px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 9px; line-height: 1.45; }
     body.remote-mode { min-height: 100svh; overflow: auto; background: #eef1ec; }
     body.remote-mode .app { display: none; }
     body.viewer-mode .controls { display: none; }
     body.viewer-mode .presenter-status { display: flex; margin-top: 10px; }
-    body.viewer-mode .presenter-status .presenter-connect { display: none; }
 
     /* White-first presentation mode */
     body { background: #eef1ec; }
@@ -1735,7 +1726,6 @@
       <div class="presenter-status" id="presenter-status" hidden>
         <span class="mode-badge" id="mode-badge">PRESENTER</span>
         <span class="presenter-status-text" id="presenter-status-text">Local presentation</span>
-        <button class="control-btn presenter-connect" id="presenter-connect" type="button">Connect</button>
       </div>
       <button class="control-btn" id="prev" type="button" aria-label="Previous slide">←</button>
       <button class="control-btn" id="next" type="button" aria-label="Next slide">→</button>
@@ -1764,16 +1754,7 @@
     </div>
     <button class="remote-grid-toggle" id="remote-grid-toggle" type="button" aria-expanded="false">Grid / choose slide</button>
     <div class="remote-grid" id="remote-grid-panel" hidden></div>
-    <section class="remote-auth" id="remote-auth" hidden>
-      <span class="small-label">PRESENTER ACCESS</span>
-      <p>Enter the presenter key to control this session. Viewers do not receive this key.</p>
-      <form id="remote-auth-form">
-        <input id="remote-secret-input" type="password" autocomplete="off" placeholder="Presenter key" aria-label="Presenter key" required>
-        <button type="submit">Connect</button>
-      </form>
-      <div class="auth-error" id="remote-auth-error" role="alert"></div>
-    </section>
-    <p class="remote-footnote">Read-only viewers use <strong>/watch/</strong>. Keep this controller link private and never add the presenter key to a shared viewer URL.</p>
+    <p class="remote-footnote">Read-only viewers use <strong>/watch/</strong>. Keep this controller link private because anyone with it can change the live slide.</p>
   </section>
 
   <script>
@@ -1789,7 +1770,6 @@
       const presenterStatus = document.querySelector("#presenter-status");
       const modeBadge = document.querySelector("#mode-badge");
       const presenterStatusText = document.querySelector("#presenter-status-text");
-      const presenterConnect = document.querySelector("#presenter-connect");
       const remoteShell = document.querySelector("#remote-shell");
       const remoteSession = document.querySelector("#remote-session");
       const remoteConnection = document.querySelector("#remote-connection");
@@ -1799,10 +1779,6 @@
       const remoteNext = document.querySelector("#remote-next");
       const remoteGridToggle = document.querySelector("#remote-grid-toggle");
       const remoteGridPanel = document.querySelector("#remote-grid-panel");
-      const remoteAuth = document.querySelector("#remote-auth");
-      const remoteAuthForm = document.querySelector("#remote-auth-form");
-      const remoteSecretInput = document.querySelector("#remote-secret-input");
-      const remoteAuthError = document.querySelector("#remote-auth-error");
       const clockFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "Africa/Accra", hour: "numeric", minute: "2-digit", hour12: true });
 
       const query = new URLSearchParams(window.location.search);
@@ -1822,8 +1798,6 @@
       let touchStartX = null;
       let touchStartY = null;
       let touchStartTarget = null;
-      let presenterKey = "";
-      let presenterAuthenticated = false;
       let realtimeDatabaseUrl = "";
       let eventSource = null;
       let pollTimer = null;
@@ -1839,9 +1813,6 @@
       function updateHash(index) { const hash = "#slide-" + (index + 1); if (window.location.hash !== hash) history.replaceState(null, "", hash); }
       function updateNotes() { notesText.textContent = slides[current].dataset.notes || "No presenter note for this slide."; }
       function apiUrl() { return "/api/session/" + encodeURIComponent(sessionId); }
-      function sessionStorageKey() { return "agent37-presenter-key:" + sessionId; }
-      function readPresenterKey() { try { return sessionStorage.getItem(sessionStorageKey()) || ""; } catch (error) { return ""; } }
-      function savePresenterKey(value) { try { sessionStorage.setItem(sessionStorageKey(), value); } catch (error) {} }
       function setConnection(state, message) {
         if (remoteConnection) { remoteConnection.dataset.state = state; remoteConnection.textContent = message; }
         if (presenterStatusText) presenterStatusText.textContent = message;
@@ -1892,57 +1863,27 @@
       function toggleNotes() { if (isViewerMode) return; notesPanel.classList.toggle("is-visible"); overview.classList.remove("is-visible"); }
       function showToast(message) { toast.textContent = message; toast.classList.add("is-visible"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 1600); }
 
-      function showRemoteAuth(show, message = "") {
-        if (!remoteAuth) return;
-        remoteAuth.hidden = !show;
-        remoteAuthError.textContent = message;
-        if (show && isRemoteMode) setTimeout(() => remoteSecretInput?.focus(), 0);
-      }
-
       async function publishCurrentSlide() {
         if (!isControllerMode) return false;
-        if (!presenterKey) {
-          setConnection("needs-auth", isRemoteMode ? "Enter the presenter key to control this session" : "Local only · connect presenter to broadcast");
-          if (isRemoteMode) showRemoteAuth(true);
-          return false;
-        }
         try {
           const response = await fetch(apiUrl(), {
             method: "PUT",
             cache: "no-store",
-            headers: { "Content-Type": "application/json", "X-Presenter-Key": presenterKey },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ slide: current })
           });
           const payload = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(payload.error || "Presenter access was rejected");
-          presenterAuthenticated = true;
-          savePresenterKey(presenterKey);
-          showRemoteAuth(false);
+          if (!response.ok) throw new Error(payload.error || "Unable to publish slide");
           setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
           return true;
         } catch (error) {
-          presenterAuthenticated = false;
           setConnection("error", error.message || "Presenter connection failed");
-          if (isRemoteMode) showRemoteAuth(true, error.message || "Presenter connection failed");
           showToast(error.message || "Presenter connection failed");
           return false;
         }
       }
 
-      async function ensurePresenterAccess() {
-        if (!isControllerMode) return false;
-        if (presenterAuthenticated) return true;
-        if (!presenterKey && isRemoteMode) { showRemoteAuth(true); return false; }
-        if (!presenterKey) {
-          const supplied = window.prompt("Enter the presenter key for this session:");
-          if (!supplied) return false;
-          presenterKey = supplied.trim();
-        }
-        return publishCurrentSlide();
-      }
-
       async function remoteNavigate(index) {
-        if (!(await ensurePresenterAccess())) return;
         goTo(index, index > current ? "next" : "prev");
         await publishCurrentSlide();
         if (remoteGridPanel) { remoteGridPanel.hidden = true; remoteGridToggle.setAttribute("aria-expanded", "false"); }
@@ -1954,7 +1895,7 @@
         if (!Number.isInteger(remoteSlide) || remoteSlide < 0 || remoteSlide >= slides.length) return;
         if (remoteSlide !== current) goTo(remoteSlide, remoteSlide > current ? "next" : "prev");
         if (isViewerMode) setConnection("connected", "Live viewer · following presenter · slide " + pad(current + 1));
-        else if (presenterAuthenticated) setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
+        else if (isControllerMode) setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
       }
 
       function consumeFirebaseEvent(event) {
@@ -1980,8 +1921,7 @@
         eventSource.onopen = () => {
           if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
           if (isViewerMode) setConnection("connected", "Live viewer · following presenter · slide " + pad(current + 1));
-          else if (presenterAuthenticated) setConnection("connected", (isRemoteMode ? "Controller connected" : "Presenter connected") + " · broadcasting slide " + pad(current + 1));
-          else setConnection("connected", isRemoteMode ? "Live deck ready · enter presenter key to control" : "Live deck ready · connect presenter to broadcast");
+          else setConnection("connected", isRemoteMode ? "Live deck ready · controller active" : "Live deck ready · ready to broadcast");
         };
         eventSource.onerror = () => { setConnection("error", "Reconnecting to the live deck…"); startPolling(); };
       }
@@ -1999,7 +1939,7 @@
             if (realtimeDatabaseUrl) startFirebaseStream();
             else startPolling();
           }
-          if (!eventSource && !isViewerMode && !presenterAuthenticated) setConnection("connected", "Live deck ready · enter presenter key to control");
+          if (!eventSource && !isViewerMode) setConnection("connected", (isRemoteMode ? "Controller ready" : "Presenter ready") + " · broadcasting slide " + pad(current + 1));
         } catch (error) {
           setConnection("error", error.message || "Realtime backend is not configured");
           startPolling();
@@ -2023,20 +1963,12 @@
       document.querySelector("#next").addEventListener("click", next);
       document.querySelector("#overview-btn").addEventListener("click", () => toggleOverview());
       document.querySelector("#notes-btn").addEventListener("click", toggleNotes);
-      presenterConnect.addEventListener("click", () => { void ensurePresenterAccess(); });
       remotePrev.addEventListener("click", () => { void remoteNavigate(current - 1); });
       remoteNext.addEventListener("click", () => { void remoteNavigate(current + 1); });
       remoteGridToggle.addEventListener("click", () => {
         const visible = remoteGridPanel.hidden;
         remoteGridPanel.hidden = !visible;
         remoteGridToggle.setAttribute("aria-expanded", String(visible));
-      });
-      remoteAuthForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const value = remoteSecretInput.value.trim();
-        if (!value) return;
-        presenterKey = value;
-        await publishCurrentSlide();
       });
       document.querySelector("#fullscreen-btn").addEventListener("click", async () => {
         try { if (!document.fullscreenElement) await document.documentElement.requestFullscreen(); else await document.exitFullscreen(); }
@@ -2091,9 +2023,7 @@
         if (isViewerMode) {
           setConnection("connecting", "Connecting to the live deck…");
         } else {
-          presenterKey = readPresenterKey();
-          setConnection("connecting", isRemoteMode ? "Enter the presenter key to control this session" : "Local deck · connect presenter to broadcast");
-          if (isRemoteMode) showRemoteAuth(!presenterKey);
+          setConnection("connecting", isRemoteMode ? "Connecting controller…" : "Local deck · ready to broadcast");
         }
         void fetchRemoteState();
       }
